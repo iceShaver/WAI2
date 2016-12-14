@@ -17,17 +17,74 @@
     <IncludeDebugInformation>false</IncludeDebugInformation>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Config\config.php" />
     <Compile Include="Config\dbConfig.php" />
     <Compile Include="Controllers\Controller.php" />
+    <Compile Include="Controllers\GalleryController.php" />
+    <Compile Include="HTML\footer.html.php" />
+    <Compile Include="HTML\header.html.php" />
+    <Compile Include="HTML\nav.html.php" />
+    <Compile Include="Includes\helpers.inc.php" />
     <Compile Include="index.php" />
+    <Compile Include="Models\GalleryModel.php" />
     <Compile Include="Models\Model.php" />
+    <Compile Include="Views\GalleryView.php" />
     <Compile Include="Views\View.php" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Fonts\" />
+    <Folder Include="Images\" />
     <Folder Include="Models\" />
     <Folder Include="Controllers\" />
     <Folder Include="Config\" />
     <Folder Include="HTML\" />
+    <Folder Include="HTML\Partials\" />
+    <Folder Include="JS\" />
+    <Folder Include="CSS\" />
+    <Folder Include="Includes\" />
     <Folder Include="Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CSS\color-blue.css" />
+    <Content Include="CSS\color-red.css" />
+    <Content Include="CSS\style.css" />
+    <Content Include="Fonts\Lato-Regular.ttf" />
+    <Content Include="Images\AnthonyHopkins10TIFF-min.jpg" />
+    <Content Include="Images\AnthonyHopkins10TIFF.jpg" />
+    <Content Include="Images\Bruce_Willis_by_Gage_Skidmore-min.jpg" />
+    <Content Include="Images\Bruce_Willis_by_Gage_Skidmore.jpg" />
+    <Content Include="Images\Christopher_Lee_at_the_Berlin_International_Film_Festival_2013-min.jpg" />
+    <Content Include="Images\Christopher_Lee_at_the_Berlin_International_Film_Festival_2013.jpg" />
+    <Content Include="Images\Harrison_Fords_Jules_Verne_Award_%28cropped%29-min.jpg" />
+    <Content Include="Images\Harrison_Fords_Jules_Verne_Award_%28cropped%29.JPG" />
+    <Content Include="Images\Jodie_Foster.4785-min.jpg" />
+    <Content Include="Images\Jodie_Foster.4785.jpg" />
+    <Content Include="Images\JohnnyDeppHWOFJune2013_%28cropped_right_side%29-min.jpg" />
+    <Content Include="Images\JohnnyDeppHWOFJune2013_%28cropped_right_side%29.jpg" />
+    <Content Include="Images\Julia_Roberts_2011_Shankbone_3-min.jpg" />
+    <Content Include="Images\Julia_Roberts_2011_Shankbone_3.JPG" />
+    <Content Include="Images\Marilyn_Monroe_in_Niagara-min.jpg" />
+    <Content Include="Images\Marilyn_Monroe_in_Niagara.jpg" />
+    <Content Include="Images\Morgan_Freeman_Cannes-min.jpg" />
+    <Content Include="Images\Morgan_Freeman_Cannes.jpg" />
+    <Content Include="Images\Nicolas_Cage_-_66me_Festival_de_Venise_%28Mostra%29-min.jpg" />
+    <Content Include="Images\Nicolas_Cage_-_66me_Festival_de_Venise_%28Mostra%29.jpg" />
+    <Content Include="Images\pexels-photo-27008.jpg" />
+    <Content Include="Images\Robert_De_Niro_KVIFF_portrait-min.jpg" />
+    <Content Include="Images\Robert_De_Niro_KVIFF_portrait.jpg" />
+    <Content Include="Images\SchwarzeneggerJan2010-min.jpg" />
+    <Content Include="Images\SchwarzeneggerJan2010.jpg" />
+    <Content Include="Images\SeanConneryJune08_crop-min.jpg" />
+    <Content Include="Images\SeanConneryJune08_crop.jpg" />
+    <Content Include="Images\seigaiha.png" />
+    <Content Include="Images\Sylvester_Stallone_2012-min.jpg" />
+    <Content Include="Images\Sylvester_Stallone_2012.jpg" />
+    <Content Include="Images\TomHanksApr09-min.jpg" />
+    <Content Include="Images\TomHanksApr09.jpg" />
+    <Content Include="HTML\body.html.php" />
+    <Content Include="JS\counter.js" />
+    <Content Include="JS\jquery-3.1.1.min.js" />
+    <Content Include="JS\jquery-ui-1.12.1.min.js" />
+    <Content Include="JS\main.js" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,151 @@
+﻿
+body {
+    color: #000;
+}
+
+
+.logo {
+    color: white;
+}
+
+/*----------------------------------------------NAV---------------------------------------*/
+
+
+nav {
+
+    background-color: #955;
+    border-top: 1px solid #733;
+    border-bottom: 1px solid #733;
+
+}
+
+
+
+    nav .menu ul a {
+        color: #fff;
+
+    }
+
+nav > .menu > ul > li:hover > a {
+    color: #faa;
+}
+
+
+
+    nav > .menu > ul > li:hover, li.selected {
+        background-color: #844;
+    }
+
+
+
+
+    nav > .menu > ul > li > ul > li {
+
+        border-top: 1px dashed #fff;
+                background-color: #a66;
+    }
+
+        nav > .menu > ul > li > ul > li:hover {
+            background-color: #955;
+        }
+
+            nav > .menu > ul > li > ul > li:hover > a {
+                color: #faa;
+            }
+
+label[for=switch] {
+    color: #fff;
+    background-color: #955;
+    border-left: 1px solid #733;
+
+}
+
+
+/*---------------------------------------BODY-------------------------------------------*/
+
+
+
+.tile {
+    background-color: #955;
+
+    color: #fff;
+
+}
+
+    .tile:hover {
+        background-color: #933;
+    }
+
+.block {
+
+    box-shadow: 5px 5px 10px #999;
+}
+
+.col1 {
+    background-color: #fff;
+
+}
+
+.content {
+    background-color: #fff;
+
+}
+
+.col2 {
+    background-color: #fff;
+
+}
+
+    .col2 a {
+
+        color: #fff;
+        background-color: #a66;
+
+    }
+
+        .col2 a:hover {
+            background-color: #844;
+        }
+
+.title {
+
+    color: #fff;
+    background-color: #955;
+
+}
+
+
+footer {
+    color: #fff;
+    background-color: #955;
+
+}
+
+.footer-a {
+
+    color: #fff;
+
+}
+
+
+.footer-a:hover {
+    background-color: #844;
+}
+
+
+
+
+
+/*--------------------------------------GALLERY------------------------------------------*/
+.gallery img {
+
+    border: 10px solid #d99;
+    box-shadow: 0 0 10px #d99;
+}
+
+
+
+
+
+
+
