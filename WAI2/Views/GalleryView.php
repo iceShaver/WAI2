@@ -18,10 +18,11 @@ class GalleryView extends View{
 
     public function index(){
         $model = $this->LoadModel('Gallery');
+
+        //Gets data
         $model->GetPicturesInfo();
         $model->GetPictures();
-        $this->SetOutput($model->getAll());
-        $this->RenderPage('galleryIndex');
+        $this->RenderPage('galleryIndex', $model->getAll());
     }
 
     public function Add(){

@@ -15,6 +15,7 @@
         <div class="col1 block">
             <div class="title"><?php safePrint($output->col1Title) ?></div>
             <div id="col1-content" class="text">
+                ąęźćół
                 <?php safePrint($output->col1Content) ?>
             </div>
         </div>

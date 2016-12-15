@@ -8,7 +8,7 @@
 
     </div>
     <div class="footer-center">
-        &copy; 2016 Kamil Królikowski
+        &copy; 2016 Kamil KrÃ³likowski
         
 
     </div>

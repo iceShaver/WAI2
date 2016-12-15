@@ -3,7 +3,12 @@ require './Config/config.php';
 require INCLUDES.'helpers.inc.php';
 
 $object = new stdClass();
-
+if (isset($_GET['info']))
+{
+    echo 'ąćżęół';
+	phpinfo();
+    exit;
+}
 
 //Loads gallery module
 if($_GET['module'] == 'gallery' && isset($_GET['action'])){
@@ -11,6 +16,7 @@ if($_GET['module'] == 'gallery' && isset($_GET['action'])){
     $controller = new GalleryController();
     $controller->$_GET['action']();
 }
+
 
 
 

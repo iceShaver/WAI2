@@ -3,7 +3,7 @@
         <label for="switch">&#9776;</label>
         <div class="menu">
             <ul>
-                <li class="selected"><a href="index.html">Strona g≥Ûwna</a></li>
+                <li class="selected"><a href="index.html">Strona g≈Ç√≥wna</a></li>
                 <li>
                     <a href="popular.html">Popularne filmy</a>
                     <ul>

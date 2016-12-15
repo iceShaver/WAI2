@@ -30,6 +30,8 @@
     <Compile Include="Models\GalleryModel.php" />
     <Compile Include="Models\Model.php" />
     <Compile Include="Models\PictureData.php" />
+    <Compile Include="Templates\addEditForm.html.php" />
+    <Compile Include="Templates\galleryIndex.html.php" />
     <Compile Include="Views\GalleryView.php" />
     <Compile Include="Views\View.php" />
   </ItemGroup>

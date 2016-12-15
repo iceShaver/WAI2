@@ -32,7 +32,7 @@ abstract class View
         return $model;
     }
 
-    public function RenderPage($name){
+    public function RenderPage($name, $output){
         $path = TEMPLATES."$name.html.php";
         $name .= 'Template';
         try{
