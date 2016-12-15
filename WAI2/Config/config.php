@@ -6,9 +6,11 @@ define('VIEWS', APP_ROOT.'/Views/');
 define('CONTROLLERS', APP_ROOT.'/Controllers/');
 define('TEMPLATES', APP_ROOT.'/Templates/');
 define('HTML', APP_ROOT.'/Html/');
+define('PARTIALS', HTML.'Partials/');
 define('CONFIG', APP_ROOT.'/Config/');
 define('INCLUDES', APP_ROOT.'/Includes/');
 define('CSS', APP_ROOT.'/CSS/');
 define('JS', APP_ROOT.'/JS/');
 define('DEBUG', false);
+define('TITLE', 'Galeria filmów');
 ?>

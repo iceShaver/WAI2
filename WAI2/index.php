@@ -15,11 +15,12 @@ if($_GET['module'] == 'gallery' && isset($_GET['action'])){
     require CONTROLLERS."GalleryController.php";
     $controller = new GalleryController();
     $controller->$_GET['action']();
+    exit;
 }
 
 
 
 
 //If nothing selected display main page
-
+require TEMPLATES.'defaultTemplate.html.php';
 

@@ -21,17 +21,15 @@
     <Compile Include="Config\dbConfig.php" />
     <Compile Include="Controllers\Controller.php" />
     <Compile Include="Controllers\GalleryController.php" />
-    <Compile Include="HTML\footer.html.php" />
-    <Compile Include="HTML\header.html.php" />
-    <Compile Include="HTML\nav.html.php" />
-    <Compile Include="HTML\Partials\addEditForm.html.php" />
+    <Compile Include="HTML\galleryIndex.html.php" />
+    <Compile Include="HTML\head.html.php" />
+    <Compile Include="HTML\addEditForm.html.php" />
     <Compile Include="Includes\helpers.inc.php" />
     <Compile Include="index.php" />
     <Compile Include="Models\GalleryModel.php" />
     <Compile Include="Models\Model.php" />
-    <Compile Include="Models\PictureData.php" />
-    <Compile Include="Templates\addEditForm.html.php" />
-    <Compile Include="Templates\galleryIndex.html.php" />
+    <Compile Include="Models\Picture.php" />
+    <Compile Include="Templates\defaultTemplate.html.php" />
     <Compile Include="Views\GalleryView.php" />
     <Compile Include="Views\View.php" />
   </ItemGroup>
@@ -42,7 +40,6 @@
     <Folder Include="Controllers\" />
     <Folder Include="Config\" />
     <Folder Include="HTML\" />
-    <Folder Include="HTML\Partials\" />
     <Folder Include="JS\" />
     <Folder Include="CSS\" />
     <Folder Include="Includes\" />
@@ -86,7 +83,6 @@
     <Content Include="Images\Sylvester_Stallone_2012.jpg" />
     <Content Include="Images\TomHanksApr09-min.jpg" />
     <Content Include="Images\TomHanksApr09.jpg" />
-    <Content Include="HTML\body.html.php" />
     <Content Include="JS\counter.js" />
     <Content Include="JS\jquery-3.1.1.min.js" />
     <Content Include="JS\jquery-ui-1.12.1.min.js" />

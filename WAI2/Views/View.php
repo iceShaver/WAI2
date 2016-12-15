@@ -10,7 +10,6 @@
  */
 abstract class View
 {
-    protected $output = stdClass;
 
     public function LoadModel($name){
         $path = MODELS.$name.'Model.php';
@@ -33,12 +32,9 @@ abstract class View
     }
 
     public function RenderPage($name, $output){
-        $path = TEMPLATES."$name.html.php";
-        $name .= 'Template';
+        $path = HTML."$name.html.php";
         try{
-            if(is_file($path))
-                require $path;
-            else
+            if(!is_file($path))
                 throw new Exception("Unable to open $name<br/>Path: $path");
         }
         catch(Exception $e) {
@@ -48,14 +44,9 @@ abstract class View
                 Trace: '.$e->getTraceAsString();
             exit;
         }
-    }
+        include TEMPLATES.'defaultTemplate.html.php';
 
-    public function SetOutput(){
-        
-    }
 
-    public function Get($name){
-        return$this->$name;
     }
 
 }

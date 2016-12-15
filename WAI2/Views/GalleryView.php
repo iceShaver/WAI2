@@ -18,7 +18,6 @@ class GalleryView extends View{
 
     public function index(){
         $model = $this->LoadModel('Gallery');
-
         //Gets data
         $model->GetPicturesInfo();
         $model->GetPictures();
@@ -26,7 +25,10 @@ class GalleryView extends View{
     }
 
     public function Add(){
-        $this->RenderPage('addEditForm');
+        $output = new stdClass;
+        $output->pageTitle = "Dodaj nowy obraz - " . TITLE;
+        $output->formLegend = 'Dodaj nowe zdjęcie';
+        $this->RenderPage('addEditForm', $output);
 
     }
 }
