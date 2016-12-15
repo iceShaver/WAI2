@@ -2,10 +2,8 @@
 require './Config/config.php';
 require INCLUDES.'helpers.inc.php';
 
-$object = new stdClass();
 if (isset($_GET['info']))
 {
-    echo 'ąćżęół';
 	phpinfo();
     exit;
 }
@@ -17,8 +15,6 @@ if($_GET['module'] == 'gallery' && isset($_GET['action'])){
     $controller->$_GET['action']();
     exit;
 }
-
-
 
 
 //If nothing selected display main page
