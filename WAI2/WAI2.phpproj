@@ -24,10 +24,12 @@
     <Compile Include="HTML\footer.html.php" />
     <Compile Include="HTML\header.html.php" />
     <Compile Include="HTML\nav.html.php" />
+    <Compile Include="HTML\Partials\addEditForm.html.php" />
     <Compile Include="Includes\helpers.inc.php" />
     <Compile Include="index.php" />
     <Compile Include="Models\GalleryModel.php" />
     <Compile Include="Models\Model.php" />
+    <Compile Include="Models\PictureData.php" />
     <Compile Include="Views\GalleryView.php" />
     <Compile Include="Views\View.php" />
   </ItemGroup>
@@ -42,6 +44,7 @@
     <Folder Include="JS\" />
     <Folder Include="CSS\" />
     <Folder Include="Includes\" />
+    <Folder Include="Templates\" />
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>

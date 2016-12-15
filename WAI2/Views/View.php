@@ -50,7 +50,7 @@ abstract class View
         }
     }
 
-    public function SetOutput($name, $value){
+    public function SetOutput(){
         
     }
 

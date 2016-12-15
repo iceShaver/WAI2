@@ -19,13 +19,15 @@ class GalleryController extends Controller
         $view->index();
     }
 
+
+
     /**
      * Displays add form for adding a new photo
      * @return void
      */
     public function add(){
         $view = $this->LoadView('Gallery');
-        $view->add();
+        $view->Add();
     }
 
 
@@ -50,19 +52,10 @@ class GalleryController extends Controller
     }
 
 
-    /**
-     * Loads sample data do db for testing purposes
-     * @return void
-     */
     public function loadsampledata(){
         $model = $this->LoadModel('Gallery');
-        $data = array(
-            "title" => "MongoDB",
-            "description" => "database",
-            "likes" => 100,
-            "url" => "http://www.tutorialspoint.com/mongodb/",
-            "by", "tutorials point");
-        $model->Create($data);
-        $this->Redirect('?');
+        $model->LoadSampleData();
+       // $this->Redirect('?');
     }
+
 }

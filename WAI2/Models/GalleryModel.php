@@ -28,6 +28,23 @@ class GalleryModel extends Model
 
     }
 
+
+    public function SavePicture(){
+
+          }
+
+
+    /**
+     * Gets pictures info from db
+     * @return void
+     */
+    public function GetPicturesInfo(){
+
+    }
+
+    public function GetPictures(){
+
+    }
     public function Read(){
 
     }
@@ -40,4 +57,15 @@ class GalleryModel extends Model
 
     }
 
+    /**
+     * Loads sample data do db for testing purposes
+     * @return void
+     */
+    public function LoadSampleData(){
+        $data = new stdClass();
+        $data->title = "Cokkjbbjkvhchxxh";
+        $data->desc = "fds";
+        $data->likes = 213;
+        $this->Create($data);
+    }
 }
