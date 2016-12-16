@@ -45,7 +45,7 @@ class GalleryController extends Controller
             exit;
         }
 
-        $this->Redirect('?task=gallery&action=index');
+        $this->Redirect('?module=gallery&action=index');
     }
 
 

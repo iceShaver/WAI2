@@ -22,4 +22,4 @@ if($_GET['module'] == 'gallery' && isset($_GET['action'])){
 
 //If nothing selected display main page
 require TEMPLATES.'defaultTemplate.html.php';
-
+unset($_SESSION['messages']);

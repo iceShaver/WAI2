@@ -51,6 +51,7 @@ class GalleryModel extends Model
             $messages[] = new Message('success', 'Zdjęcie zostało zapisane');
             return array('errors'=>0, 'messages' => $messages);
         }
+        $_SESSION['form'] = $_POST;
         return array('errors'=>1, 'messages' => $errors);
     }
 

@@ -37,13 +37,13 @@ class GalleryView extends View{
 
         $output->formLegend = 'Dodaj nowe zdjęcie';
         $output->_id = null;
-        $output->author = $_POST['author'];
-        $output->title = $_POST['title'];
-        $output->watermark = $_POST['watermark'];
-        $output->description = $_POST['description'];
-
-
+        $output->author = $_SESSION['form']['author'];
+        $output->title = $_SESSION['form']['title'];
+        $output->watermark = $_SESSION['form']['watermark'];
+        $output->description = $_SESSION['form']['description'];
+        $output->private = $_SESSION['form']['private'];
         $this->RenderPage('addEditForm', $output);
+        unset($_SESSION['form']);
 
     }
     public function Error($errors){
