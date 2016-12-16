@@ -30,8 +30,29 @@ class GalleryModel extends Model
 
 
     public function SavePicture(){
-
-          }
+        //unset picture id to allow MongoDB create its own
+        unset($_POST['_id']);
+        $errors = array();
+        $this->Create($_POST);
+        $file = $_FILES['photo']['tmp_name'];
+        $fileExtension = strtolower(end(explode('.', $_FILES['photo']['name'])));
+        $fileSize = $_FILES['photo']['size'];
+        $fileName = $_POST['_id'].'.'.$fileExtension;
+        if(!in_array($fileExtension, PHOTOS_ALLOWED_FILE_EXTENSIONS))
+        {
+            $errors[] = new Message('error',
+                'Nieprawidłowe rozszerzenie pliku. Plik musi mieć jedno z następujących rozszerzeń: '.
+                join(', ', PHOTOS_ALLOWED_FILE_EXTENSIONS));
+        }
+        if($fileSize > PHOTOS_MAX_FILE_SIZE)
+            $errors[] = new Message('error', 'Za duży rozmiar pliku. Podaj mniejszy plik i wyślij ponownie');
+        if(empty($errors)){
+            move_uploaded_file($file, PHOTOS_DIR.$fileName);
+            $messages[] = new Message('success', 'Zdjęcie zostało zapisane');
+            return array('errors'=>0, 'messages' => $messages);
+        }
+        return array('errors'=>1, 'messages' => $errors);
+    }
 
 
     /**

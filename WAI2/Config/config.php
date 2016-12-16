@@ -13,4 +13,7 @@ define('CSS', APP_ROOT.'/CSS/');
 define('JS', APP_ROOT.'/JS/');
 define('DEBUG', false);
 define('TITLE', 'Galeria filmów');
+define('PHOTOS_DIR', APP_ROOT.'/Images/Photos/');
+define('PHOTOS_MAX_FILE_SIZE', 1048576);
+const PHOTOS_ALLOWED_FILE_EXTENSIONS = array('png', 'jpg', 'jpeg');
 ?>

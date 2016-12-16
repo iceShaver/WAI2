@@ -49,8 +49,17 @@
 
         </nav>
         <div class="container">
-
-
+    
+            
+            <?php foreach ($_SESSION['messages'] as $message): ?>
+                      
+                          <div class="message block <?php echo $message->type; ?>">
+                          <?php echo $message->message; ?>
+                           </div>
+                      
+            <?php endforeach; ?>
+           
+  
             <div class="col1 block">
                 <div class="title">
                     <?php safePrint($output->col1Title) ?>

@@ -45,7 +45,7 @@ abstract class View
             exit;
         }
         include TEMPLATES.'defaultTemplate.html.php';
-
+        unset($_SESSION['messages']);
 
     }
 

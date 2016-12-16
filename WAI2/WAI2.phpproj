@@ -21,12 +21,14 @@
     <Compile Include="Config\dbConfig.php" />
     <Compile Include="Controllers\Controller.php" />
     <Compile Include="Controllers\GalleryController.php" />
+    <Compile Include="HTML\error.html.php" />
     <Compile Include="HTML\galleryIndex.html.php" />
     <Compile Include="HTML\head.html.php" />
     <Compile Include="HTML\addEditForm.html.php" />
     <Compile Include="Includes\helpers.inc.php" />
     <Compile Include="index.php" />
     <Compile Include="Models\GalleryModel.php" />
+    <Compile Include="Models\Message.php" />
     <Compile Include="Models\Model.php" />
     <Compile Include="Models\Picture.php" />
     <Compile Include="Templates\defaultTemplate.html.php" />
@@ -36,6 +38,7 @@
   <ItemGroup>
     <Folder Include="Fonts\" />
     <Folder Include="Images\" />
+    <Folder Include="Images\Photos\" />
     <Folder Include="Models\" />
     <Folder Include="Controllers\" />
     <Folder Include="Config\" />

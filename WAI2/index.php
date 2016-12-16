@@ -1,14 +1,17 @@
 <?php
+
 require './Config/config.php';
 require INCLUDES.'helpers.inc.php';
+require MODELS.'Message.php';
 
+session_start();
 if (isset($_GET['info']))
 {
 	phpinfo();
     exit;
 }
 
-//Loads gallery module
+//Loads gallery module controller
 if($_GET['module'] == 'gallery' && isset($_GET['action'])){
     require CONTROLLERS."GalleryController.php";
     $controller = new GalleryController();

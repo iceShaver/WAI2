@@ -10,14 +10,13 @@
  */
 class Picture
 {
-    public $id;
+
+    public $_id;
     public $fileName;
     public $title;
     public $description;
     public $author;
     public $watermark;
-    public $width;
-    public $height;
     public $creationTime;
     public $lastEditTime;
     public $private;

@@ -16,7 +16,7 @@ class GalleryController extends Controller
      */
     public function index(){
         $view = $this->LoadView('Gallery');
-        $view->index();
+        $view->Index();
     }
 
 
@@ -37,7 +37,14 @@ class GalleryController extends Controller
      */
     public function insert(){
         $model = $this->LoadModel('Gallery');
-        $model->Create($_POST);
+        $result = $model->SavePicture();
+        $_SESSION['messages'] = $result['messages'];
+        if($result['errors']==1)
+        {
+            $this->Redirect('?module=gallery&action=add');
+            exit;
+        }
+
         $this->Redirect('?task=gallery&action=index');
     }
 
@@ -55,7 +62,7 @@ class GalleryController extends Controller
     public function loadsampledata(){
         $model = $this->LoadModel('Gallery');
         $model->LoadSampleData();
-       // $this->Redirect('?');
+        // $this->Redirect('?');
     }
 
 }
