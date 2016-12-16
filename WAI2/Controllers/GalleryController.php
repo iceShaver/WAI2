@@ -37,9 +37,7 @@ class GalleryController extends Controller
      */
     public function insert(){
         $model = $this->LoadModel('Gallery');
-        $result = $model->SavePicture();
-        $_SESSION['messages'] = $result['messages'];
-        if($result['errors']==1)
+        if($model->SavePicture())
         {
             $this->Redirect('?module=gallery&action=add');
             exit;

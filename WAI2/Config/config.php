@@ -11,9 +11,11 @@ define('CONFIG', APP_ROOT.'Config/');
 define('INCLUDES', APP_ROOT.'Includes/');
 define('CSS', APP_ROOT.'CSS/');
 define('JS', APP_ROOT.'JS/');
+define('FONTS', APP_ROOT.'Fonts/');
 define('DEBUG', false);
 define('TITLE', 'Galeria filmów');
 define('PHOTOS_DIR', APP_ROOT.'Images/Photos/');
-define('PHOTOS_MAX_FILE_SIZE', 1048576);
+define('PHOTOS_DIR_RELATIVE', '/Images/Photos/');
+define('PHOTOS_MAX_FILE_SIZE', 10485760);
 const PHOTOS_ALLOWED_FILE_EXTENSIONS = array('png', 'jpg', 'jpeg');
 ?>

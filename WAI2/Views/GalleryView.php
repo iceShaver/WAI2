@@ -18,10 +18,7 @@ class GalleryView extends View{
 
     public function Index(){
         $model = $this->LoadModel('Gallery');
-        //Gets data
-        $model->GetPicturesInfo();
-        $model->GetPictures();
-        $this->RenderPage('galleryIndex', $model->getAll());
+        $this->RenderPage('galleryIndex', $model->getPhotos());
     }
 
     public function Add($messages){
@@ -45,8 +42,5 @@ class GalleryView extends View{
         $this->RenderPage('addEditForm', $output);
         unset($_SESSION['form']);
 
-    }
-    public function Error($errors){
-        $this->RenderPage('error.html.php', $errors);
     }
 }

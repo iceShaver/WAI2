@@ -5,6 +5,7 @@ require INCLUDES.'helpers.inc.php';
 require MODELS.'Message.php';
 
 session_start();
+
 if (isset($_GET['info']))
 {
 	phpinfo();
