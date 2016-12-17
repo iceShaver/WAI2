@@ -62,26 +62,26 @@
   
             <div class="col1 block">
                 <div class="title">
-                    <?php safePrint($output->col1Title) ?>
+                    <?php safePrint($output['col1']['title']) ?>
                 </div>
                 <div id="col1-content" class="text">
-                    <?php safePrint($output->col1Content) ?>
+                    <?php include HTML.'col1.html.php'; ?>
                 </div>
             </div>
             <div class="content block">
                 <div class="title">
-                    <?php safePrint($output->contentTitle) ?>
+                    <?php echo $output['content']['title']; ?>
                 </div>
                 <div class="text">
-                    <?php include $path; ?>
+                    <?php include $output['content']['content']; ?>
                 </div>
             </div>
             <div class="col2 block">
                 <div class="title">
-                    <?php safePrint($output->col2Title) ?>
+                    <?php safePrint($output['col2']['title']); ?>
                 </div>
                 <div class="text">
-                    <?php safePrint($output->col2Content) ?>
+                    <?php include $output['col2']['content'] ;?>
                 </div>
             </div>
 

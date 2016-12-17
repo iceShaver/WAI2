@@ -11,7 +11,8 @@
 abstract class Model
 {
     protected $dbConnection = NULL;
-
+    protected $db;
+    protected $collection;
 
     /**
      * Creates connection to MongoDB
@@ -26,6 +27,7 @@ abstract class Model
         {
             echo 'Unable to connect to database: '.$exception->getMessage();
         }
+        $this->db = $this->dbConnection->Gallery;
 
     }
 
@@ -34,7 +36,7 @@ abstract class Model
         $name .= 'Model';
         try{
             if(is_file($path)){
-                require $path;
+                require_once $path;
                 $model = new $name;
             }else
                 throw new Exception("Unable to open $name <br/>Path: $path");

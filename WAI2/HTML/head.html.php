@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8" />
     <title>
-        <?php safePrint($output->pageTitle) ?>
+        <?php echo $output['page']['title']; ?>
     </title>
     <meta name="description" content="Strona o filmach" />
     <meta name="keywords" content="hobby, moje, strona, www, filmy, wideo, kino" />

@@ -1,0 +1,1 @@
+Strona główna galerii zdjęć

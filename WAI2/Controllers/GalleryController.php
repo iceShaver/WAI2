@@ -1,5 +1,5 @@
 <?php
-require CONTROLLERS.'Controller.php';
+require_once CONTROLLERS.'Controller.php';
 /**
  * Gallerry Controller
  *
@@ -14,7 +14,12 @@ class GalleryController extends Controller
      * Indexes all picture and display them
      * @return void
      */
-    public function index(){
+
+    public function DefaultAction(){
+        $this->Index();
+    }
+
+    public function Index(){
         $view = $this->LoadView('Gallery');
         $view->Index();
     }
@@ -25,7 +30,7 @@ class GalleryController extends Controller
      * Displays add form for adding a new photo
      * @return void
      */
-    public function add(){
+    public function Add(){
         $view = $this->LoadView('Gallery');
         $view->Add();
     }
@@ -35,7 +40,7 @@ class GalleryController extends Controller
      * Insert given photos to filesystem and create entry in db
      * @return void
      */
-    public function insert(){
+    public function Insert(){
         $model = $this->LoadModel('Gallery');
         if($model->SavePicture())
         {
@@ -51,13 +56,13 @@ class GalleryController extends Controller
      * Deletes entry and photo with given id
      * @return void
      */
-    public function delete(){
+    public function Delete(){
         $model = $this->LoadModel('Gallery');
         $model->Remove($_GET['id']);
     }
 
 
-    public function loadsampledata(){
+    public function LoadSampleData(){
         $model = $this->LoadModel('Gallery');
         $model->LoadSampleData();
         // $this->Redirect('?');

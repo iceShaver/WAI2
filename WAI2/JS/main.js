@@ -16,44 +16,44 @@ function setColorCSS(color) {
         document.getElementsByTagName("head").item(0).appendChild(colorlink);
     }
 }
-function addPageToHistory() {
-    if (sessionStorage.historyCount <= 10)
-        sessionStorage.setItem("historyPage" + sessionStorage.historyCount, document.title);
-    else {
-        for (var i = 0; i < sessionStorage.historyCount - 1; i++) {
-            sessionStorage["historyPage" + i] = sessionStorage["historyPage" + (i + 1)];
-        }
-        sessionStorage.removeItem("historyPage" + (sessionStorage.historyCount - 1));
-        sessionStorage.historyCount--;
-        sessionStorage.setItem("historyPage" + sessionStorage.historyCount, document.title);
+//function addPageToHistory() {
+//    if (sessionStorage.historyCount <= 10)
+//        sessionStorage.setItem("historyPage" + sessionStorage.historyCount, document.title);
+//    else {
+//        for (var i = 0; i < sessionStorage.historyCount - 1; i++) {
+//            sessionStorage["historyPage" + i] = sessionStorage["historyPage" + (i + 1)];
+//        }
+//        sessionStorage.removeItem("historyPage" + (sessionStorage.historyCount - 1));
+//        sessionStorage.historyCount--;
+//        sessionStorage.setItem("historyPage" + sessionStorage.historyCount, document.title);
 
-    }
-}
+//    }
+//}
 
-document.addEventListener("DOMContentLoaded", function () {
-    if (sessionStorage.historyCount == null) {
-        sessionStorage.historyCount = 0;
-    } else
-        sessionStorage.historyCount++;  
-    addPageToHistory();
-    getHistory();
-	if(localStorage.color != null)
-    setColorCSS(localStorage.color);
+//document.addEventListener("DOMContentLoaded", function () {
+//    if (sessionStorage.historyCount == null) {
+//        sessionStorage.historyCount = 0;
+//    } else
+//        sessionStorage.historyCount++;  
+//    addPageToHistory();
+//    getHistory();
+//	if(localStorage.color != null)
+//    setColorCSS(localStorage.color);
 
-});
+//});
 
 
-function getHistory() {
-    var pages = document.createDocumentFragment();
-    for (var i = sessionStorage.historyCount; i > 0; i--) {
-        var p = document.createElement('p');
-        p.appendChild(document.createTextNode(sessionStorage.getItem("historyPage" + i)));
-        pages.appendChild(p);
-    }
+//function getHistory() {
+//    var pages = document.createDocumentFragment();
+//    for (var i = sessionStorage.historyCount; i > 0; i--) {
+//        var p = document.createElement('p');
+//        p.appendChild(document.createTextNode(sessionStorage.getItem("historyPage" + i)));
+//        pages.appendChild(p);
+//    }
 
-    var col1 = document.getElementById("col1-content");
-    col1.appendChild(pages);
-}
+//    var col1 = document.getElementById("col1-content");
+//    col1.appendChild(pages);
+//}
 
 $(document).ready(function () {
     $(".sortable").sortable();

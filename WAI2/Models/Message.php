@@ -8,6 +8,14 @@
  * @version 1.0
  * @author Kamil
  */
+
+class MessageType{
+    const ERROR = 'error';
+    const WARNING = 'warning';
+    const INFO = 'info';
+    const SUCCESS = 'success';
+}
+
 class Message
 {
     public $type;
@@ -15,5 +23,6 @@ class Message
     public function __construct($type, $message){
         $this->type = $type;
         $this->message = $message;
+        $_SESSION['messages'][] = $this;
     }
 }

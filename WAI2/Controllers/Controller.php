@@ -10,6 +10,10 @@
  */
 abstract class Controller
 {
+    public function DefaultAction(){
+        
+    }
+
     public function Redirect($url){
         header("Location: $url");
     }
@@ -19,7 +23,7 @@ abstract class Controller
         $name .= 'View';
         try{
             if(is_file($path)){
-                require $path;
+                require_once $path;
                 $view = new $name;
             }else
                 throw new Exception("Unable to open $name <br/>Path: $path");
@@ -39,7 +43,7 @@ abstract class Controller
         $name .= 'Model';
         try{
             if(is_file($path)){
-                require $path;
+                require_once $path;
                 $model = new $name;
             }
             else

@@ -19,19 +19,31 @@
   <ItemGroup>
     <Compile Include="Config\config.php" />
     <Compile Include="Config\dbConfig.php" />
+    <Compile Include="Controllers\AuthController.php" />
     <Compile Include="Controllers\Controller.php" />
     <Compile Include="Controllers\GalleryController.php" />
+    <Compile Include="Controllers\MainController.php" />
+    <Compile Include="HTML\blank.html.php" />
+    <Compile Include="HTML\col1.html.php" />
     <Compile Include="HTML\error.html.php" />
     <Compile Include="HTML\galleryIndex.html.php" />
     <Compile Include="HTML\head.html.php" />
     <Compile Include="HTML\addEditForm.html.php" />
+    <Compile Include="HTML\loginBlock.html.php" />
+    <Compile Include="HTML\main.html.php" />
+    <Compile Include="HTML\newuser.html.php" />
+    <Compile Include="HTML\userBlock.html.php" />
     <Compile Include="Includes\helpers.inc.php" />
     <Compile Include="index.php" />
+    <Compile Include="Models\AuthModel.php" />
     <Compile Include="Models\GalleryModel.php" />
     <Compile Include="Models\Message.php" />
     <Compile Include="Models\Model.php" />
     <Compile Include="Models\Picture.php" />
+    <Compile Include="Models\User.php" />
     <Compile Include="Templates\defaultTemplate.html.php" />
+    <Compile Include="Views\AuthView.php" />
+    <Compile Include="Views\DefaultView.php" />
     <Compile Include="Views\GalleryView.php" />
     <Compile Include="Views\View.php" />
   </ItemGroup>

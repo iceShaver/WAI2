@@ -1,6 +1,6 @@
 <?php
-require MODELS.'Model.php';
-require MODELS.'Picture.php';
+require_once MODELS.'Model.php';
+require_once MODELS.'Picture.php';
 /**
  * Gallery short summary.
  *
@@ -9,14 +9,12 @@ require MODELS.'Picture.php';
  * @version 1.0
  * @author Kamil
  */
+
+//TODO: trycatch all db and require operations
 class GalleryModel extends Model
 {
-    private $db;
-    private $collection;
 
     public function GetPhotos(){
-        $this->db = $this->dbConnection->Gallery;
-        if(DEBUG) echo 'Database Gallery selected<br/>';
         $this->collection = $this->db->createCollection("Photos");
         if(DEBUG) echo 'Collection Photos created/selected<br/>';
         $fields = array('_id'=>true, 'fileName'=>true, 'title'=>true);
@@ -52,14 +50,14 @@ class GalleryModel extends Model
         if(!in_array($picture->extension, PHOTOS_ALLOWED_FILE_EXTENSIONS))
         {
             $error = true;
-            $_SESSION['messages'][] = new Message('error',
+            new Message(MessageType::ERROR,
                 'Nieprawidłowe rozszerzenie pliku. Plik musi mieć jedno z następujących rozszerzeń: '.
                 join(', ', PHOTOS_ALLOWED_FILE_EXTENSIONS));
         }
         if($picture->size > PHOTOS_MAX_FILE_SIZE)
         {
             $error = true;
-            $_SESSION['messages'][] = new Message('error', 'Za duży rozmiar pliku. Podaj mniejszy plik i wyślij ponownie');
+            new Message(MessageType::ERROR, 'Za duży rozmiar pliku. Podaj mniejszy plik i wyślij ponownie');
         }
         if($error == false){
             //If succeed
@@ -67,7 +65,7 @@ class GalleryModel extends Model
             move_uploaded_file($file, PHOTOS_DIR.$picture->fileName);
             $this->genMin($picture);
             $this->genWatermark($picture);
-            $_SESSION['messages'][] = new Message('success', 'Zdjęcie "'.$picture->title.'" zostało zapisane');
+            new Message(MessageType::SUCCESS, 'Zdjęcie "'.$picture->title.'" zostało zapisane');
             return 0;
 
         }
@@ -78,6 +76,8 @@ class GalleryModel extends Model
     }
 
     public function genWatermark($picture){
+
+        //TODO: care transparent pngs
         if($picture->extension == 'png')
             $photo = imagecreatefrompng(PHOTOS_DIR.$picture->fileName);
         else
@@ -145,8 +145,6 @@ class GalleryModel extends Model
      * @return void
      */
     public function Create($data){
-        $this->db = $this->dbConnection->Gallery;
-        if(DEBUG) echo 'Database Gallery selected<br/>';
         $this->collection = $this->db->createCollection("Photos");
         if(DEBUG) echo 'Collection Photos created/selected<br/>';
         $this->collection->insert($data);

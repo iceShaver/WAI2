@@ -304,9 +304,7 @@ table.actors {
     min-height: 700px;
 }
 
-    .col2 > .text {
-        padding: 0px;
-    }
+
 
     .col2 ul {
         list-style-type: none;
