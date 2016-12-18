@@ -101,7 +101,18 @@ footer {
 
 
 /*--------------------------------------GALLERY------------------------------------------*/
-.gallery img {
+
+.gallery .picture {
+    /*box-sizing: border-box;*/
+    margin: 20px;
+    float: left;
     border: 10px solid #99d;
     box-shadow: 0 0 10px #99d;
+    padding: 0;
+    background-color: #99d;
+    color: #000;
+}
+
+.gallery img{
+    margin: 0;
 }

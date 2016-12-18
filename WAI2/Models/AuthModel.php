@@ -45,7 +45,7 @@ class AuthModel extends Model{
         }
         if($error==false){
             $password = $this->hashPassword($_POST['password']);
-            $user = new User(new MongoId(), $_POST['userName'], $_POST['email'], $password, UserState::USER);
+            $user = new User(new MongoId(), $_POST['userName'], $_POST['email'], $password, UserType::USER);
             $this->collection = $this->db->createCollection("Users");
             $this->collection->insert($user);
             new Message(MessageType::SUCCESS, 'Konto użytkownika zostało utworzone pomyślnie');

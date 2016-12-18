@@ -20,7 +20,31 @@ class GalleryView extends View{
         $model = $this->LoadModel('Gallery');
         $output['page']['title'] = 'Wszystkie zdjęcia';
         $output['content']['title'] = 'Wszystkie zdjęcia';
-        $output['pictures'] = $model->getPictures();
+        $output['pictures'] = $model->GetPictures();
+        $output['picturesAction'] = 'savePictures';
+        $output['picturesActionButton'] = 'Zapisz wybrane zdjęcia';
+        $this->RenderPage('galleryIndex', $output);
+
+    }
+
+    public function IndexMyPictures(){
+        $model = $this->LoadModel('Gallery');
+        $output['page']['title'] = 'Moje zdjęcia';
+        $output['content']['title'] = 'Moje zdjęcia';
+        $output['pictures'] = $model->GetMyPictures();
+        $output['picturesAction'] = 'savePictures';
+        $output['picturesActionButton'] = 'Zapisz wybrane zdjęcia';
+        $this->RenderPage('galleryIndex', $output);
+    }
+
+    public function IndexSavedPictures(){
+        $model = $this->LoadModel('Gallery');
+        $output['page']['title'] = 'Zapisane zdjęcia';
+        $output['content']['title'] = 'Zapisane zdjęcia';
+        $output['pictures'] = $model->GetSavedPictures();
+        $output['picturesAction'] = 'deletePictures';
+        $output['picturesActionButton'] = 'Usuń zdjęcia z zapisanych';
+
         $this->RenderPage('galleryIndex', $output);
     }
 
@@ -34,10 +58,7 @@ class GalleryView extends View{
             $output['title'] = $_SESSION['form']['title'];
             $output['watermark'] = $_SESSION['form']['watermark'];
             $output['description'] = $_SESSION['form']['description'];
-            if(isset($_SESSION['private']))
-                $output['private'] = $_SESSION['form']['private'];
-            else
-                $output['private'] = null;
+            $output['private'] = $_SESSION['form']['private'];
         }else{
             $output['author'] = "";
             $output['title'] = "";
@@ -45,8 +66,17 @@ class GalleryView extends View{
             $output['description'] = "";
             $output['private'] = "";
         }
+        $output['author'] = ($_SESSION['auth']->DetermineAuthorisationAtLeast(UserType::USER)) ? $_SESSION['auth']->GetUserName() : '';
+
         $this->RenderPage('addEditForm', $output);
 
+    }
+
+    public function ShowFullPicture(){
+        $model = $this->LoadModel('Gallery');
+        $picture = $model->GetPicture();
+        header('Content-Type: image/jpeg');
+        readfile(PHOTOS_DIR.$picture['wmId'].'.'.$picture['extension']);
     }
 
     public function ShowPicture(){

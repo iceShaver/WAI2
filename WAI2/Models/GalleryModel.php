@@ -17,12 +17,17 @@ class GalleryModel extends Model
     public function GetPictures(){
         $this->collection = $this->db->createCollection("Photos");
         if(DEBUG) echo 'Collection Photos created/selected<br/>';
-        $fields = array('_id'=>true,'minId'=>true, 'wmId'=>true, 'extension'=>true, 'title'=>true, 'author'=>true);
-        $cursor = $this->collection->find(array(),$fields);
+        $author = $_SESSION['auth']->GetUserId();
+        $fields = array('_id'=>true,'minId'=>true, 'wmId'=>true, 'extension'=>true, 'title'=>true, 'author'=>true, 'private'=>true);
+        $where = array('$or' =>array(array('private'=>false), array('author'=> new MongoId($author))));
+        $cursor = $this->collection->find($where,$fields);
         $pictures = array();
         foreach ($cursor as $row)
         {
+            if(MongoId::isValid($row['author']))
+                $row['author'] = $this->getAuthorName($row['author']);
         	$pictures[] = $row;
+
         }
         return $pictures;
 
@@ -30,11 +35,41 @@ class GalleryModel extends Model
 
     }
 
+    private function getAuthorName($id){
+        $this->collection = $this->db->createCollection("Users");
+        $author = $this->collection->findOne(array('_id'=>$id), array('userName'=>true));
+        return $author['userName'];
+    }
+
+    public function GetMyPictures(){
+        $this->collection = $this->db->createCollection("Photos");
+        if(DEBUG) echo 'Collection Photos created/selected<br/>';
+        $fields = array('_id'=>true,'minId'=>true, 'wmId'=>true, 'extension'=>true, 'title'=>true, 'author'=>true, 'private'=> true);
+        $where = array('author'=>new MongoId($_SESSION['auth']->GetUserId()));
+        $cursor = $this->collection->find($where,$fields);
+        $pictures = array();
+        foreach ($cursor as $row)
+        {
+            if(MongoId::isValid($row['author']))
+                $row['author'] = $this->getAuthorName($row['author']);
+        	$pictures[] = $row;
+        }
+        return $pictures;
+    }
+
+
+    public function GetSavedPictures(){
+        return $_SESSION['savedPictures'];
+    }
+
+
     public function GetPicture(){
         $this->collection = $this->db->createCollection("Photos");
         if(DEBUG) echo 'Collection Photos created/selected<br/>';
         $where = array('_id' => new MongoId($_GET['id']));
         $picture = $this->collection->findOne($where);
+        if(MongoId::isValid($picture['author']))
+            $picture['author'] = $this->getAuthorName($picture['author']);
         return $picture;
 
     }
@@ -46,8 +81,14 @@ class GalleryModel extends Model
     public function SavePicture(){
         $error = false;
         $fileExtension = strtolower(end(explode('.', $_FILES['photo']['name'])));
+        if($_SESSION['auth']->DetermineAuthorisationAtLeast(UserType::USER))
+            $author = new MongoId($_SESSION['auth']->GetUserId());
+        else
+            $author = $_POST['author'];
+
+
         $picture = new Picture(new MongoId(), new MongoId(), new MongoId(), $fileExtension, $_FILES['photo']['size'],
-            $_POST['title'], $_POST['description'], $_POST['author'], $_POST['watermark'],
+            $_POST['title'], $_POST['description'], $author, $_POST['watermark'],
             time(), null, ($_POST['private'] == 'true') ? true : false);
         $file = $_FILES['photo']['tmp_name'];
 
@@ -95,7 +136,7 @@ class GalleryModel extends Model
         else
             imagejpeg($photo, PHOTOS_DIR.$picture->wmId.'.'.$picture->extension);
 
-            imagedestroy($photo);
+        imagedestroy($photo);
     }
 
     private function genMin($picture){

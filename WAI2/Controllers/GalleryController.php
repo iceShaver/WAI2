@@ -24,17 +24,33 @@ class GalleryController extends Controller
         $view->Index();
     }
 
+    public function IndexMyPictures(){
+        $_SESSION['auth']->AuthoriseAtLeast(UserType::USER);
+        $view = $this->LoadView("Gallery");
+        $view->IndexMyPictures();
+    }
+
     public function ShowPicture(){
         $view = $this->LoadView('Gallery');
-        $view->ShowPicture();
+        $view->ShowFullPicture();
     }
+
+    public function IndexSavedPictures(){
+        $view = $this->LoadView('Gallery');
+        $view->IndexSavedPictures();
+    }
+
+    public function MyPictures(){
+        $view = $this->LoadView('Gallery');
+        $view->IndexMyPictures();
+    }
+
 
     /**
      * Displays add form for adding a new photo
      * @return void
      */
     public function Add(){
-        $_SESSION['auth']->Authorisation(UserState::ADMIN);
         $view = $this->LoadView('Gallery');
         $view->Add();
     }
@@ -49,7 +65,6 @@ class GalleryController extends Controller
         if($model->SavePicture())
         {
             $this->Redirect('?module=gallery&action=add');
-            exit;
         }
 
         $this->Redirect('?module=gallery&action=index');

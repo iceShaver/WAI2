@@ -419,10 +419,14 @@ form {
 .gallery img{
     margin: 0;
 }
+.private{
+    color: #f00;
+}
 
 
-
-
+.selectPicture{
+    display: block;
+}
 
 
 /*----------------------------------------RESPONSIVE------------------------------------*/

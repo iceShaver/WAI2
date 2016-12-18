@@ -137,10 +137,19 @@ footer {
 
 
 /*--------------------------------------GALLERY------------------------------------------*/
-.gallery img {
-
+.gallery .picture {
+    /*box-sizing: border-box;*/
+    margin: 20px;
+    float: left;
     border: 10px solid #d99;
     box-shadow: 0 0 10px #d99;
+    padding: 0;
+    background-color: #d99;
+    color: #000;
+}
+
+.gallery img{
+    margin: 0;
 }
 
 

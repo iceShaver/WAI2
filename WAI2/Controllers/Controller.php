@@ -16,6 +16,7 @@ abstract class Controller
 
     public function Redirect($url){
         header("Location: $url");
+        exit;
     }
 
     public function LoadView($name){

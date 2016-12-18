@@ -37,10 +37,10 @@ abstract class View
         $userBlock = HTML.'userBlock.html.php';
         $loginBlock = HTML.'loginBlock.html.php';
         $output['col2']['title'] =
-            ($_SESSION['auth']->GetUserState() == UserState::USER || $_SESSION['auth']->GetUserState() == UserState::ADMIN)
+            ($_SESSION['auth']->GetUserState() == UserType::USER || $_SESSION['auth']->GetUserState() == UserType::ADMIN)
             ? 'Witaj, '.$_SESSION['auth']->GetUserName()
             : 'Zaloguj się';
-        $output['col2']['content'] = ($_SESSION['auth']->GetUserState() == UserState::USER || $_SESSION['auth']->GetUserState() == UserState::ADMIN)
+        $output['col2']['content'] = ($_SESSION['auth']->GetUserState() == UserType::USER || $_SESSION['auth']->GetUserState() == UserType::ADMIN)
             ? $userBlock
             : $loginBlock;
         $output['content']['content'] = HTML."$name.html.php";
