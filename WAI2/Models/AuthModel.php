@@ -19,43 +19,46 @@ class AuthModel extends Model{
         if($_POST['userName'] == ''){
             $error = true;
             $userNameOk = false;
-            $_SESSION['messages'][] = new Message(MessageType::ERROR, 'Musisz podać nazwę użytkownika');
+            new Message(MessageType::ERROR, 'Musisz podać nazwę użytkownika');
         }
         if($_POST['password'] == ''){
             $error = true;
-            $_SESSION['messages'][] = new Message(MessageType::ERROR, 'Musisz podać hasło, które składa sie przynajmniej z 8 znaków');
+            new Message(MessageType::ERROR, 'Musisz podać hasło, które składa sie przynajmniej z 8 znaków');
         }
         //TODO: email correctness verification
         if($_POST['email'] == ''){
             $error = true;
             $emailOk = false;
-            $_SESSION['messages'][] = new Message(MessageType::ERROR, 'Musisz podać prawidłowy adres e-mail');
+            new Message(MessageType::ERROR, 'Musisz podać prawidłowy adres e-mail');
         }
         if($_POST['password'] != $_POST['password2']){
             $error = true;
-            $_SESSION['messages'][] = new Message(MessageType::ERROR, 'Wpisane hasła nie są takie same');
+            new Message(MessageType::ERROR, 'Wpisane hasła nie są takie same');
         }
         if($userNameOk == true && $this->CheckIfUserNameUsed($_POST['userName'])){
             $error = true;
-            $_SESSION['messages'][] = new Message(MessageType::ERROR, 'Użytkownik o podanej nazwie już istnieje. Wpisz inną nazwę');
+            new Message(MessageType::ERROR, 'Użytkownik o podanej nazwie już istnieje. Wpisz inną nazwę');
         }
         if($emailOk == true && $this->CheckIfEmailUsed($_POST['email'])){
             $error = true;
-            $_SESSION['messages'][] = new Message(MessageType::ERROR, 'Podany adres e-mail jest już używany. Podaj inny adres e-mail');
+            new Message(MessageType::ERROR, 'Podany adres e-mail jest już używany. Podaj inny adres e-mail');
         }
         if($error==false){
-            $password = md5($_POST['password'].PASSWORD_SALT);
-            $user = new User(new MongoId(), $_POST['userName'], $_POST['email'], $password);
+            $password = $this->hashPassword($_POST['password']);
+            $user = new User(new MongoId(), $_POST['userName'], $_POST['email'], $password, UserState::USER);
             $this->collection = $this->db->createCollection("Users");
             $this->collection->insert($user);
-            $_SESSION['messages'][] = new Message(MessageType::SUCCESS, 'Konto użytkownika zostało utworzone pomyślnie');
+            new Message(MessageType::SUCCESS, 'Konto użytkownika zostało utworzone pomyślnie');
             return 0;
         }
 
-        $_SESSION['form'] = $_POST;
+        $_SESSION['registerForm'] = $_POST;
         return 1;
     }
 
+    private function hashPassword($password){
+        return md5($password.PASSWORD_SALT);
+    }
     /**
      * Verifies if userName is used in DB and returns true or false
      * @return bool
@@ -75,12 +78,26 @@ class AuthModel extends Model{
         return true;
     }
 
-    public function CheckIfUserIsLoggedIn(){
-        if($_SESSION['loggedIn'] == true)
-            return true;
-        return false;
+    public function GetUser(){
+
+        $this->collection = $this->db->createCollection("Users");
+        $where = array('userName' => $_POST['userName']);
+        $user = $this->collection->findOne($where);
+        if($user == null){
+            new Message(MessageType::ERROR, 'Nie znaleziono użytkownika w bazie danych.');
+            $_SESSION['loginForm'] = $_POST;
+            return null;
+        }
+        if($this->hashPassword($_POST['password']) != $user['password']){
+            new Message(MessageType::ERROR, 'Podane hasło jest niepoprawne');
+            $_SESSION['loginForm'] = $_POST;
+            return null;
+        }
+            new Message(MessageType::SUCCESS, 'Użytkownik pomyślnie zalogowany');
+            return $user;
+
+
 
     }
-
 
 }

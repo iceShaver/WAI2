@@ -32,6 +32,7 @@
     <Compile Include="HTML\loginBlock.html.php" />
     <Compile Include="HTML\main.html.php" />
     <Compile Include="HTML\newuser.html.php" />
+    <Compile Include="HTML\picture.html.php" />
     <Compile Include="HTML\userBlock.html.php" />
     <Compile Include="Includes\helpers.inc.php" />
     <Compile Include="index.php" />

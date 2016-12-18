@@ -8,7 +8,7 @@ require_once CONTROLLERS.'Controller.php';
  * @version 1.0
  * @author Kamil
  */
-class Priviledge
+class UserState
 {
 	const ADMIN = 1;
     const USER = 2;
@@ -18,29 +18,38 @@ class Priviledge
 
 class AuthController extends Controller
 {
-    private $isLoggedIn;
-    private $privileges;
-    private $model;
+    private $userName;
+    private $userId;
+    private $userState;
     //check if user is logged in, privileges etc
     public function __construct(){
-        $this->model = $this->LoadModel("Auth");
-        $this->model->checkIfUserLoggedIn();
+        $this->userId = null;
+        $this->userName = null;
+        $this->userState = UserState::GUEST;
+
     }
 
     public function login(){
-        if(!$this->model->checkIfUserExists()){
-            $_SESSION['messages'][] = new Message(MessageType::ERROR, 'Nie znaleziono u¿ytkownika w bazie danych.');
+        $model = $this->LoadModel("Auth");
+        if($this->userState != UserState::GUEST){
+            new Message(MessageType::ERROR, 'Jesteœ juz zalogowany');
             $this->Redirect($_SERVER['HTTP_REFERER']);
-        }else if(!$this->model->checkPassword()){
-            $_SESSION['messages'][] = new Message(MessageType::ERROR, 'Podane has³o jest niepoprawne');
-            $this->Redirect($_SERVER['HTTP_REFERER']);
-        }else{
-            $this->isLoggedIn = true;
-            $this->privileges = $this->model->getPrivileges();
-            $_SESSION['messages'][] = new Message(MessageType::SUCCESS, 'U¿ytkownik pomyœlnie zalogowany');
         }
+        $user = $model->GetUser();
+        if($user == null)
+            $this->Redirect($_SERVER['HTTP_REFERER']);
+        $this->userName = $user['userName'];
+        $this->userId = $user['_id'];
+        $this->userState = $user['privileges'];
+        $this->Redirect($_SERVER['HTTP_REFERER']);
     }
 
+    public function GetUserState(){
+        return $this->userState;
+    }
+    public function GetUserName(){
+        return $this->userName;
+    }
     public function logout(){
 
     }

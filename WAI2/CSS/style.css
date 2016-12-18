@@ -405,15 +405,20 @@ form {
 
 
 /*--------------------------------------GALLERY------------------------------------------*/
-.gallery img {
-    box-sizing: border-box;
+.gallery .picture {
+    /*box-sizing: border-box;*/
     margin: 20px;
-    height: 200px;
     float: left;
     border: 10px solid #9d9;
     box-shadow: 0 0 10px #9d9;
+    padding: 0;
+    background-color: #9d9;
+    color: #000;
 }
 
+.gallery img{
+    margin: 0;
+}
 
 
 

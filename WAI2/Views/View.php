@@ -37,14 +37,18 @@ abstract class View
         $userBlock = HTML.'userBlock.html.php';
         $loginBlock = HTML.'loginBlock.html.php';
         $output['col2']['title'] =
-            (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true)
-            ? 'Witaj'.$_SESSION['userName']
+            ($_SESSION['auth']->GetUserState() == UserState::USER || $_SESSION['auth']->GetUserState() == UserState::ADMIN)
+            ? 'Witaj, '.$_SESSION['auth']->GetUserName()
             : 'Zaloguj się';
-        $output['col2']['content'] = (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true)
+        $output['col2']['content'] = ($_SESSION['auth']->GetUserState() == UserState::USER || $_SESSION['auth']->GetUserState() == UserState::ADMIN)
             ? $userBlock
             : $loginBlock;
         $output['content']['content'] = HTML."$name.html.php";
         $output['col1']['title'] = 'Czas';
+        if(isset($_POST['loginForm']))
+            $output['loginForm']['userName'] = $_POST['loginForm']['userName'];
+        else
+            $output['loginForm']['userName'] = '';
         //try{
         //    if(!is_file($path))
         //        throw new Exception("Unable to open $name<br/>Path: $path");

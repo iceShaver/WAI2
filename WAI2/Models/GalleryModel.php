@@ -14,10 +14,10 @@ require_once MODELS.'Picture.php';
 class GalleryModel extends Model
 {
 
-    public function GetPhotos(){
+    public function GetPictures(){
         $this->collection = $this->db->createCollection("Photos");
         if(DEBUG) echo 'Collection Photos created/selected<br/>';
-        $fields = array('_id'=>true, 'fileName'=>true, 'title'=>true);
+        $fields = array('_id'=>true,'minId'=>true, 'wmId'=>true, 'extension'=>true, 'title'=>true, 'author'=>true);
         $cursor = $this->collection->find(array(),$fields);
         $pictures = array();
         foreach ($cursor as $row)
@@ -30,7 +30,14 @@ class GalleryModel extends Model
 
     }
 
+    public function GetPicture(){
+        $this->collection = $this->db->createCollection("Photos");
+        if(DEBUG) echo 'Collection Photos created/selected<br/>';
+        $where = array('_id' => new MongoId($_GET['id']));
+        $picture = $this->collection->findOne($where);
+        return $picture;
 
+    }
 
     /**
      * Handle with incoming photo. Returns 0 if succeed 1 if failed
@@ -38,13 +45,10 @@ class GalleryModel extends Model
      */
     public function SavePicture(){
         $error = false;
-        $id = new MongoId();
         $fileExtension = strtolower(end(explode('.', $_FILES['photo']['name'])));
-
-        $picture = new Picture($id, $id.'.'.$fileExtension, $fileExtension, $_FILES['photo']['size'],
+        $picture = new Picture(new MongoId(), new MongoId(), new MongoId(), $fileExtension, $_FILES['photo']['size'],
             $_POST['title'], $_POST['description'], $_POST['author'], $_POST['watermark'],
             time(), null, ($_POST['private'] == 'true') ? true : false);
-
         $file = $_FILES['photo']['tmp_name'];
 
         if(!in_array($picture->extension, PHOTOS_ALLOWED_FILE_EXTENSIONS))
@@ -62,7 +66,7 @@ class GalleryModel extends Model
         if($error == false){
             //If succeed
             $this->Create($picture);
-            move_uploaded_file($file, PHOTOS_DIR.$picture->fileName);
+            move_uploaded_file($file, PHOTOS_DIR.$picture->_id.'.'.$picture->extension);
             $this->genMin($picture);
             $this->genWatermark($picture);
             new Message(MessageType::SUCCESS, 'Zdjęcie "'.$picture->title.'" zostało zapisane');
@@ -79,26 +83,26 @@ class GalleryModel extends Model
 
         //TODO: care transparent pngs
         if($picture->extension == 'png')
-            $photo = imagecreatefrompng(PHOTOS_DIR.$picture->fileName);
+            $photo = imagecreatefrompng(PHOTOS_DIR.$picture->_id.'.'.$picture->extension);
         else
-            $photo = imagecreatefromjpeg(PHOTOS_DIR.$picture->fileName);
+            $photo = imagecreatefromjpeg(PHOTOS_DIR.$picture->_id.'.'.$picture->extension);
 
         $textcolor = imagecolorallocate($photo, 255, 255, 255);
         imagettftext($photo, 14, 0, 30, imagesy($photo)-30,$textcolor, FONTS.'Lato-Regular.ttf', $picture->watermark);
 
         if($picture->extension == 'png')
-            imagepng($photo, PHOTOS_DIR.$picture->_id.'_wm.png', 8);
+            imagepng($photo, PHOTOS_DIR.$picture->wmId.'.'.$picture->extension);
         else
-            imagejpeg($photo, PHOTOS_DIR.$picture->_id.'_wm.jpeg');
+            imagejpeg($photo, PHOTOS_DIR.$picture->wmId.'.'.$picture->extension);
 
             imagedestroy($photo);
     }
 
     private function genMin($picture){
         if($picture->extension == 'png')
-            $src = imagecreatefrompng(PHOTOS_DIR.$picture->fileName);
+            $src = imagecreatefrompng(PHOTOS_DIR.$picture->_id.'.'.$picture->extension);
         else
-            $src = imagecreatefromjpeg(PHOTOS_DIR.$picture->fileName);
+            $src = imagecreatefromjpeg(PHOTOS_DIR.$picture->_id.'.'.$picture->extension);
         $minWidth = 200;
         $minHeight = 125;
         $min = imagecreate($minWidth, $minHeight);
@@ -127,9 +131,9 @@ class GalleryModel extends Model
 
 
         if($picture->extension == 'png')
-            imagepng($min, PHOTOS_DIR.$picture->_id.'_min.png');
+            imagepng($min, PHOTOS_DIR.$picture->minId.'.'.$picture->extension);
         else
-            imagejpeg($min, PHOTOS_DIR.$picture->_id.'_min.jpeg');
+            imagejpeg($min, PHOTOS_DIR.$picture->minId.'.'.$picture->extension);
         imagedestroy($src);
         imagedestroy($min);
 

@@ -20,8 +20,7 @@ class GalleryView extends View{
         $model = $this->LoadModel('Gallery');
         $output['page']['title'] = 'Wszystkie zdjęcia';
         $output['content']['title'] = 'Wszystkie zdjęcia';
-        $output['pictures'] = $model->getPhotos();
-
+        $output['pictures'] = $model->getPictures();
         $this->RenderPage('galleryIndex', $output);
     }
 
@@ -48,5 +47,14 @@ class GalleryView extends View{
         }
         $this->RenderPage('addEditForm', $output);
 
+    }
+
+    public function ShowPicture(){
+        $model = $this->LoadModel('Gallery');
+        $picture = $model->GetPicture();
+        $output['page']['title'] = $picture['title'];
+        $output['content']['title'] = $picture['title'];
+        $output['picture'] = $picture;
+        $this->RenderPage('picture', $output);
     }
 }

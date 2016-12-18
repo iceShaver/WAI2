@@ -11,14 +11,20 @@ require_once VIEWS.'View.php';
 class AuthView extends View
 {
     public function NewUser(){
-        $output = new stdClass();
-        $output->pagetitle = "Rejestracja nowego u�ytkownika";
-        $output->userName = $_SESSION['form']['userName'];
-        $output->email = $_SESSION['form']['email'];
+        $output['page']['title'] = "Rejestracja nowego użytkownika";
+        $output['content']['title'] = "Rejestracja nowego użytkownika";
+        if(isset($_SESSION['form'])){
+            $output['registerForm']['userName'] = $_SESSION['registerForm']['userName'];
+            $output['registerForm']['email']= $_SESSION['registerForm']['email'];
+        }else
+        {
+            $output['registerForm']['userName'] = '';
+            $output['registerForm']['email'] = '';
+        }
         $this->RenderPage('newuser', $output);
     }
 
     public function displayUserBlock(){
-        
+
     }
 }

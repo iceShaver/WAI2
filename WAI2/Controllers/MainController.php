@@ -2,6 +2,8 @@
 require_once INCLUDES.'helpers.inc.php';
 require_once MODELS.'Message.php';
 require_once CONTROLLERS.'Controller.php';
+require_once CONTROLLERS.'AuthController.php';
+require_once MODELS.'AuthModel.php';
 /**
  * mainController short summary.
  *
@@ -16,15 +18,18 @@ class MainController extends Controller
         session_start();
         if(!isset($_SESSION['messages']))
             $_SESSION['messages'] = array();
+        if(!isset($_SESSION['auth']))
+            $_SESSION['auth'] = new AuthController();
+        if(isset($_REQUEST['module']) && $_REQUEST['module'] == 'auth'){
+            $_SESSION['auth']->$_REQUEST['action']();
+            $this->Redirect($_SESSION['HTTP_REFERER']);
+        }
+
         $this->action();
     }
 
     private function action(){
         if(empty($_GET['module'])){
-            if(!empty($_GET)) {
-                $this->Redirect('.');
-                exit;
-            }
             require_once VIEWS.'DefaultView.php';
             $view = new DefaultView();
             $view->DisplayMain();
@@ -44,10 +49,10 @@ class MainController extends Controller
         }else{
             require_once $controllerPath;
             $controller = new $controllerName();
-            if(empty($_GET['action']))
+            if(empty($_REQUEST['action']))
                 $controller->DefaultAction();
             else{
-                $action = ucfirst(strtolower($_GET['action']));
+                $action = ucfirst(strtolower($_REQUEST['action']));
                 $controller->$action();
             }
 

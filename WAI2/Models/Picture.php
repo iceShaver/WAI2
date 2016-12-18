@@ -12,7 +12,8 @@ class Picture
 {
 
     public $_id;
-    public $fileName;
+    public $minId;
+    public $wmId;
     public $extension;
     public $size;
     public $title;
@@ -24,9 +25,10 @@ class Picture
     public $private;
 
 
-    public function __construct($_id, $fileName, $extension,$size, $title, $description, $author, $watermark, $creationTime, $lastEditTime, $private){
+    public function __construct($_id, $minId, $wmId, $extension,$size, $title, $description, $author, $watermark, $creationTime, $lastEditTime, $private){
         $this->_id = $_id;
-        $this->fileName = $fileName;
+        $this->minId = $minId;
+        $this->wmId = $wmId;
         $this->extension = $extension;
         $this->size = $size;
         $this->title = $title;

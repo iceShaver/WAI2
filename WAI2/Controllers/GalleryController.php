@@ -24,7 +24,10 @@ class GalleryController extends Controller
         $view->Index();
     }
 
-
+    public function ShowPicture(){
+        $view = $this->LoadView('Gallery');
+        $view->ShowPicture();
+    }
 
     /**
      * Displays add form for adding a new photo
