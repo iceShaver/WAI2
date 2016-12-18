@@ -34,6 +34,7 @@ class GalleryController extends Controller
      * @return void
      */
     public function Add(){
+        $_SESSION['auth']->Authorisation(UserState::ADMIN);
         $view = $this->LoadView('Gallery');
         $view->Add();
     }

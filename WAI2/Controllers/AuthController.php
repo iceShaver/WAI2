@@ -10,9 +10,9 @@ require_once CONTROLLERS.'Controller.php';
  */
 class UserState
 {
-	const ADMIN = 1;
-    const USER = 2;
-    const GUEST = 3;
+	const ADMIN = 2;
+    const USER = 1;
+    const GUEST = 0;
 }
 
 
@@ -32,7 +32,7 @@ class AuthController extends Controller
     public function login(){
         $model = $this->LoadModel("Auth");
         if($this->userState != UserState::GUEST){
-            new Message(MessageType::ERROR, 'Jeste� juz zalogowany');
+            new Message(MessageType::ERROR, 'Jesteś juz zalogowany');
             $this->Redirect($_SERVER['HTTP_REFERER']);
         }
         $user = $model->GetUser();
@@ -47,11 +47,16 @@ class AuthController extends Controller
     public function GetUserState(){
         return $this->userState;
     }
+
     public function GetUserName(){
         return $this->userName;
     }
-    public function logout(){
 
+    public function logout(){
+        $this->userName = null;
+        $this->userId = null;
+        $this->userState = UserState::GUEST;
+        $this->Redirect($_SERVER['HTTP_REFERER']);
     }
 
     public function newuser(){
@@ -60,15 +65,22 @@ class AuthController extends Controller
     }
 
     public function register(){
-        if($this->model->Register()){
-            $this->Redirect('?module=auth&action=newuser');
+        $model = $this->LoadModel("Auth");
+        if($model->Register()){
+            $this->Redirect('?auth&action=newuser');
             exit;
         }
-        $this->Redirect('?module=gallery&action=index');
+        $this->Redirect('.');
     }
 
-    public function edit(){
-
+    public function Authorisation($userState){
+        //If user is at least given $userState
+        if(!$_SESSION['auth']->GetUserState() >= $userState){
+            new Message(MessageType::ERROR, 'Nie masz uprawnień do przeglądania tej strony');
+            $view = $this->LoadView('Default');
+            $view->DisplayBlank();
+            exit;
+        }
     }
 
 }

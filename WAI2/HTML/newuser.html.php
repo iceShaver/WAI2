@@ -1,4 +1,4 @@
-<form action="?module=auth" method="post">
+<form action="?auth" method="post">
     <fieldset>
         <legend>Podaj swoje dane</legend>
         <label for="userName">Nazwa użytkownika:</label><br/>

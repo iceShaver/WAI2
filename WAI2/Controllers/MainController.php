@@ -20,9 +20,10 @@ class MainController extends Controller
             $_SESSION['messages'] = array();
         if(!isset($_SESSION['auth']))
             $_SESSION['auth'] = new AuthController();
-        if(isset($_REQUEST['module']) && $_REQUEST['module'] == 'auth'){
-            $_SESSION['auth']->$_REQUEST['action']();
-            $this->Redirect($_SESSION['HTTP_REFERER']);
+        if(isset($_REQUEST['auth']) || (isset($_GET['module']) && $_GET['module'] == 'auth')){
+            $action = $_REQUEST['action'];
+            $_SESSION['auth']->$action();
+            $this->Redirect($_SERVER['HTTP_REFERER']);
         }
 
         $this->action();
