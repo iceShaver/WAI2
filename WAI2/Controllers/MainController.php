@@ -14,50 +14,83 @@ require_once MODELS.'AuthModel.php';
  */
 class MainController extends Controller
 {
+
+    /**
+     * Start session, auth, messages, do action
+     */
     public function __construct(){
         session_start();
         if(!isset($_SESSION['messages']))
             $_SESSION['messages'] = array();
         if(!isset($_SESSION['auth']))
             $_SESSION['auth'] = new AuthController();
+        $this->authHandle();
+        $this->loadModuleController();
+    }
+
+    /**
+     * Do auth actions like registering, logging in and return to the last page
+     */
+    private function authHandle(){
         if(isset($_REQUEST['auth']) || (isset($_GET['module']) && $_GET['module'] == 'auth')){
-            $action = $_REQUEST['action'];
-            $_SESSION['auth']->$action();
-            $this->Redirect($_SERVER['HTTP_REFERER']);
+            try
+            {
+                if (!isset($_REQUEST['action']))
+                    throw new Exception("Nie podano akcji");
+            	$action = $_REQUEST['action'];
+                if (!method_exists($_SESSION['auth'], $action))
+                    throw new Exception("Podano nieprawidłową akcję");
+                $_SESSION['auth']->$action();
+                $this->Redirect($_SERVER['HTTP_REFERER']);
+            }
+            catch (Exception $exception)
+            {
+                new Message(MessageType::ERROR, $exception->getMessage());
+                $view = $this->LoadView("Default");
+                $view->DisplayError();
+            }
+            exit();
         }
-
-        $this->action();
     }
 
-    private function action(){
-        if(empty($_GET['module'])){
-            require_once VIEWS.'DefaultView.php';
-            $view = new DefaultView();
+    /**
+     * Load module controller based on input data (REQUEST) and do action
+     */
+    private function loadModuleController(){
+        if(empty($_REQUEST)){
+            $view = $this->LoadView("Default");
             $view->DisplayMain();
-        }else{
-            $this->loadModule();
+            exit();
         }
-    }
-    private function loadModule(){
-        $controllerName = ucfirst(strtolower($_GET['module'])).'Controller';
-        $controllerPath = CONTROLLERS.$controllerName.'.php';
-        if(!is_file($controllerPath)){
-            new Message(MessageType::ERROR, 'Nie odnaleziono podanej strony');
-            require_once VIEWS.'DefaultView.php';
-            $view = new DefaultView();
-            $view->DisplayBlank();
 
-        }else{
+        try
+        {
+        	if(!isset($_REQUEST['module']))
+                throw new Exception("Podana strona nie została odnaleziona");
+            $controllerName = ucfirst(strtolower($_REQUEST['module'])).'Controller';
+            $controllerPath = CONTROLLERS.$controllerName.'.php';
+            if(!is_file($controllerPath))
+                throw new Exception("Nie odnaleziono podanego modułu");
             require_once $controllerPath;
             $controller = new $controllerName();
-            if(empty($_REQUEST['action']))
-                $controller->DefaultAction();
-            else{
-                $action = ucfirst(strtolower($_REQUEST['action']));
-                $controller->$action();
-            }
+        }
+        catch (Exception $exception)
+        {
+            new Message(MessageType::ERROR, $exception->getMessage());
+            $view = $this->LoadView("Default");
+            $view->DisplayError();
+            exit();
 
         }
+
+        if(empty($_REQUEST['action']))
+            $controller->DefaultAction();
+        else{
+            $action = ucfirst(strtolower($_REQUEST['action']));
+            $controller->$action();
+        }
+
+
     }
 
 

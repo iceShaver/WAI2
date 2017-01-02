@@ -125,7 +125,7 @@ class AuthController extends Controller
     private function displayNotAuthorised(){
         new Message(MessageType::ERROR, 'Nie masz uprawnień do przeglądania tej strony');
         $view = $this->LoadView('Default');
-        $view->DisplayBlank();
+        $view->DisplayError();
         exit;
     }
 

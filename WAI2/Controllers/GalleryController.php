@@ -40,6 +40,13 @@ class GalleryController extends Controller
         $view->IndexSavedPictures();
     }
 
+    public function SavePictures(){
+        //TODO: move it to model
+        $_SESSION['savedPictures'] = $_POST['savedPictures'];
+        $view = $this->LoadView("Gallery");
+        $view->Index();
+    }
+
     public function MyPictures(){
         $view = $this->LoadView('Gallery');
         $view->IndexMyPictures();

@@ -17,7 +17,7 @@ class defaultView extends View
         $this->RenderPage('main', $output);
     }
 
-    public function DisplayBlank(){
+    public function DisplayError(){
         $output['page']['title'] = "Blank";
         $output['content']['title'] = 'Blank';
         $this->RenderPage('blank', $output);

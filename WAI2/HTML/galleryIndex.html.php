@@ -5,7 +5,7 @@
         
 
             <div class="picture">
-                <input class="selectPicture" type="checkbox" name="savedPictures" id="<?php safePrint($picture['_id']); ?>" />
+                <input class="selectPicture" type="checkbox" name="savedPictures[]" id="<?php safePrint($picture['_id']); ?>" value="<?php safePrint($picture['_id']); ?>" />
 
                 <label for="<?php safePrint($picture['_id']); ?>">
                     <a href="?module=gallery&action=showpicture&id=<?php safePrint($picture['_id']) ?>">

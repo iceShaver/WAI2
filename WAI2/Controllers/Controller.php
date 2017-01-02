@@ -10,52 +10,44 @@
  */
 abstract class Controller
 {
-    public function DefaultAction(){
-        
-    }
 
     public function Redirect($url){
         header("Location: $url");
         exit;
     }
 
-    public function LoadView($name){
-        $path = VIEWS.$name.'View.php';
-        $name .= 'View';
+    public function LoadView($viewName){
+        $viewPath = VIEWS.$viewName.'View.php';
+        $viewName .= 'View';
         try{
-            if(is_file($path)){
-                require_once $path;
-                $view = new $name;
-            }else
-                throw new Exception("Unable to open $name <br/>Path: $path");
+            if(!is_file($viewPath))
+                throw new Exception("B³¹d podczas ³adowania widoku");
+            require_once $viewPath;
+            $view = new $viewName;
         }
-        catch(Exception $e){
-            echo $e->getMessage().'<br />
-                File: '.$e->getFile().'<br />
-                Code line: '.$e->getLine().'<br />
-                Trace: '.$e->getTraceAsString();
-            exit;
+        catch(Exception $exception){
+            new Message(MessageType::ERROR, $exception->getMessage());
+            $view = $this->LoadView("Default");
+            $view->DisplayError();
+            exit();
         }
         return $view;
     }
 
-    public function LoadModel($name){
-        $path = MODELS.$name.'Model.php';
-        $name .= 'Model';
+    public function LoadModel($modelName){
+        $modelPath = MODELS.$modelName.'Model.php';
+        $modelName .= 'Model';
         try{
-            if(is_file($path)){
-                require_once $path;
-                $model = new $name;
-            }
-            else
-                throw new Exception("Unable to open $name <br/>Path: $path");
+            if(!is_file($modelPath))
+                throw new Exception("B³¹d podczas ³adowania modelu");
+            require_once $modelPath;
+            $model = new $modelName;
         }
-        catch(Exception $e){
-            echo $e->getMessage().'<br />
-                File: '.$e->getFile().'<br />
-                Code line: '.$e->getLine().'<br />
-                Trace: '.$e->getTraceAsString();
-            exit;
+        catch(Exception $exception){
+            new Message(MessageType::ERROR, $exception->getMessage());
+            $view = $this->LoadView("Default");
+            $view->DisplayError();
+            exit();
         }
         return $model;
     }

@@ -31,39 +31,21 @@ abstract class Model
 
     }
 
-    public function LoadModel($name){
-        $path = MODELS.$name.'Model.php';
-        $name .= 'Model';
+    public function LoadModel($modelName){
+        $modelPath = MODELS.$modelName.'Model.php';
+        $modelName .= 'Model';
         try{
-            if(is_file($path)){
-                require_once $path;
-                $model = new $name;
-            }else
-                throw new Exception("Unable to open $name <br/>Path: $path");
+            if(!is_file($modelPath))
+                throw new Exception("B³¹d podczas ³adowania modelu");
+            require_once $modelPath;
+            $model = new $modelName;
         }
-        catch(Exception $e) {
-            echo $e->getMessage().'<br />
-                File: '.$e->getFile().'<br />
-                Code line: '.$e->getLine().'<br />
-                Trace: '.$e->getTraceAsString();
-            exit;
+        catch(Exception $exception){
+            new Message(MessageType::ERROR, $exception->getMessage());
+            $view = $this->LoadView("Default");
+            $view->DisplayError();
+            exit();
         }
         return $model;
-    }
-
-    public function Create($data){
-
-    }
-
-    public function Read(){
-
-    }
-
-    public function Update(){
-
-    }
-
-    public function Delete($id){
-
     }
 }

@@ -104,6 +104,8 @@ class GalleryModel extends Model
             $error = true;
             new Message(MessageType::ERROR, 'Za duży rozmiar pliku. Podaj mniejszy plik i wyślij ponownie');
         }
+        
+        
         if($error == false){
             //If succeed
             $this->Create($picture);

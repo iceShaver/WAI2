@@ -7,3 +7,4 @@
     <input type="submit" value="Zaloguj się" />
 </form>
 <a href="?auth&action=newuser">Zarejestruj się</a>
+<a href="?module=gallery&action=indexsavedpictures">Zapisane w tej sesji</a>

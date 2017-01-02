@@ -58,7 +58,7 @@ class GalleryView extends View{
             $output['title'] = $_SESSION['form']['title'];
             $output['watermark'] = $_SESSION['form']['watermark'];
             $output['description'] = $_SESSION['form']['description'];
-            $output['private'] = $_SESSION['form']['private'];
+            $output['private'] = (isset($_SESSION['form']['private'])) ? $_SESSION['form']['private'] : false;
         }else{
             $output['author'] = "";
             $output['title'] = "";
