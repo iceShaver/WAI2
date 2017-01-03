@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 
-<?php include HTML.'head.html.php' ?>
+<?php include TEMPLATE_DIR.'head.html.php' ?>
 
 <body>
     <span id="top"></span>
@@ -65,7 +65,7 @@
                     <?php safePrint($output['col1']['title']) ?>
                 </div>
                 <div id="col1-content" class="text">
-                    <?php include HTML.'col1.html.php'; ?>
+                    <?php include TEMPLATE_DIR.'col1.html.php'; ?>
                 </div>
             </div>
             <div class="content block">

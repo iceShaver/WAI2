@@ -30,9 +30,6 @@ class GalleryModel extends Model
 
         }
         return $pictures;
-
-
-
     }
 
     private function getAuthorName($id){
@@ -59,14 +56,22 @@ class GalleryModel extends Model
 
 
     public function GetSavedPictures(){
-        return $_SESSION['savedPictures'];
+        $pictures = null;
+        if(!isset($_SESSION['savedPictures']))
+            new Message(MessageType::INFO, "Brak zdjęć do wyświetlenia");
+        else
+        foreach ((array)$_SESSION['savedPictures'] as $id)
+        {
+        	$pictures[] = $this->GetPicture($id);
+        }
+        return $pictures;
     }
 
 
-    public function GetPicture(){
+    public function GetPicture($id = null){
         $this->collection = $this->db->createCollection("Photos");
         if(DEBUG) echo 'Collection Photos created/selected<br/>';
-        $where = array('_id' => new MongoId($_GET['id']));
+        $where = array('_id' => new MongoId(($id) ? $id : $_GET['id']));
         $picture = $this->collection->findOne($where);
         if(MongoId::isValid($picture['author']))
             $picture['author'] = $this->getAuthorName($picture['author']);
@@ -81,34 +86,43 @@ class GalleryModel extends Model
     public function SavePicture(){
         $error = false;
         $fileExtension = strtolower(end(explode('.', $_FILES['photo']['name'])));
-        if($_SESSION['auth']->DetermineAuthorisationAtLeast(UserType::USER))
+        if(determineAuthorisationAtLeast(UserType::USER))
             $author = new MongoId($_SESSION['auth']->GetUserId());
         else
             $author = $_POST['author'];
 
 
         $picture = new Picture(new MongoId(), new MongoId(), new MongoId(), $fileExtension, $_FILES['photo']['size'],
-            $_POST['title'], $_POST['description'], $author, $_POST['watermark'],
-            time(), null, ($_POST['private'] == 'true') ? true : false);
+            $_POST['title'], $author, $_POST['watermark'],
+            time(), ($_POST['private'] == 'true') ? true : false);
         $file = $_FILES['photo']['tmp_name'];
+        if($file == null){
+            $error = true;
+            new Message(MessageType::ERROR, "Nie wybrano pliku do wysłania");
+        }else{
+            if(!in_array($picture->extension, PHOTOS_ALLOWED_FILE_EXTENSIONS))
+            {
+                $error = true;
+                new Message(MessageType::ERROR,
+                    'Nieprawidłowe rozszerzenie pliku. Plik musi mieć jedno z następujących rozszerzeń: '.
+                    join(', ', PHOTOS_ALLOWED_FILE_EXTENSIONS));
+            }
+            if($picture->size > PHOTOS_MAX_FILE_SIZE)
+            {
+                $error = true;
+                new Message(MessageType::ERROR, 'Za duży rozmiar pliku. Podaj mniejszy plik i wyślij ponownie');
+            }
+        }
+        if ($picture->watermark == '')
+        {
+        	$error = true;
+            new Message(MessageType::ERROR, 'Musisz wypełnić pole "znak wodny"');
+        }
 
-        if(!in_array($picture->extension, PHOTOS_ALLOWED_FILE_EXTENSIONS))
-        {
-            $error = true;
-            new Message(MessageType::ERROR,
-                'Nieprawidłowe rozszerzenie pliku. Plik musi mieć jedno z następujących rozszerzeń: '.
-                join(', ', PHOTOS_ALLOWED_FILE_EXTENSIONS));
-        }
-        if($picture->size > PHOTOS_MAX_FILE_SIZE)
-        {
-            $error = true;
-            new Message(MessageType::ERROR, 'Za duży rozmiar pliku. Podaj mniejszy plik i wyślij ponownie');
-        }
-        
-        
+
         if($error == false){
-            //If succeed
-            $this->Create($picture);
+
+            $this->create($picture);
             move_uploaded_file($file, PHOTOS_DIR.$picture->_id.'.'.$picture->extension);
             $this->genMin($picture);
             $this->genWatermark($picture);
@@ -117,12 +131,31 @@ class GalleryModel extends Model
 
         }
 
-        //If fail
         $_SESSION['form'] = $_POST;
         return 1;
     }
 
-    public function genWatermark($picture){
+    public function SessionSavePictures(){
+        if($_SESSION['savedPictures'] = $_POST['savedPictures'])
+            new Message(MessageType::SUCCESS, "Wybrane zdjęcia zostały zapisane");
+        else
+            new Message(MessageType::ERROR, "Musisz wybrać conajmniej jedno zdjęcie do zapisania");
+    }
+
+    public function DeleteSavedPictures(){
+        if(!$_POST['savedPictures'])
+            new Message(MessageType::ERROR, "Musisz wybrać conajmniej jedno zdjęcie do usunięcia");
+        else
+        foreach ($_POST['savedPictures'] as $pictureToDelete)
+        {
+        	$key = array_search($pictureToDelete, $_SESSION['savedPictures']);
+            unset($_SESSION['savedPictures'][$key]);
+        }
+
+
+    }
+
+    private function genWatermark($picture){
 
         //TODO: care transparent pngs
         if($picture->extension == 'png')
@@ -184,45 +217,15 @@ class GalleryModel extends Model
 
 
 
-
-    //------------------------DB CRUD operations--------------------------------------
-    /**
-     * Creates new entry in database
-     * @param mixed $data
-     * @return void
-     */
-    public function Create($data){
+    private function create($data){
         $this->collection = $this->db->createCollection("Photos");
         if(DEBUG) echo 'Collection Photos created/selected<br/>';
         $this->collection->insert($data);
         if(DEBUG) echo 'Inserted data to db<br/>';
 
     }
-    public function Read(){
-
-    }
-
-    public function Update(){
-
-    }
-
-    public function Delete($id){
-
-    }
 
 
 
 
-
-    /**
-     * Loads sample data do db for testing purposes
-     * @return void
-     */
-    public function LoadSampleData(){
-        $data = new stdClass();
-        $data->title = "Cokkjbbjkvhchxxh";
-        $data->desc = "fds";
-        $data->likes = 213;
-        $this->Create($data);
-    }
 }

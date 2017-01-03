@@ -21,16 +21,16 @@ class AuthModel extends Model{
             $userNameOk = false;
             new Message(MessageType::ERROR, 'Musisz podać nazwę użytkownika');
         }
-        if($_POST['password'] == ''){
-            $error = true;
-            new Message(MessageType::ERROR, 'Musisz podać hasło, które składa sie przynajmniej z 8 znaków');
-        }
         //TODO: email correctness verification
         if($_POST['email'] == ''){
             $error = true;
             $emailOk = false;
             new Message(MessageType::ERROR, 'Musisz podać prawidłowy adres e-mail');
         }
+        if(strlen($_POST['password']) < 8){
+            $error = true;
+            new Message(MessageType::ERROR, "Wpisane hasło musi mieć długość minimum 8 znaków");
+        }else
         if($_POST['password'] != $_POST['password2']){
             $error = true;
             new Message(MessageType::ERROR, 'Wpisane hasła nie są takie same');
@@ -57,7 +57,7 @@ class AuthModel extends Model{
     }
 
     private function hashPassword($password){
-        return md5($password.PASSWORD_SALT);
+        return password_hash($password.PASSWORD_SALT, PASSWORD_DEFAULT);
     }
     /**
      * Verifies if userName is used in DB and returns true or false
@@ -88,7 +88,7 @@ class AuthModel extends Model{
             $_SESSION['loginForm'] = $_POST;
             return null;
         }
-        if($this->hashPassword($_POST['password']) != $user['password']){
+        if(!password_verify($_POST['password'].PASSWORD_SALT, $user['password'])){
             new Message(MessageType::ERROR, 'Podane hasło jest niepoprawne');
             $_SESSION['loginForm'] = $_POST;
             return null;

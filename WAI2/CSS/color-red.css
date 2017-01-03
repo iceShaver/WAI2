@@ -12,23 +12,20 @@ body {
 
 
 nav {
-
     background-color: #955;
     border-top: 1px solid #733;
     border-bottom: 1px solid #733;
-
 }
 
 
 
     nav .menu ul a {
         color: #fff;
-
     }
 
-nav > .menu > ul > li:hover > a {
-    color: #faa;
-}
+    nav > .menu > ul > li:hover > a {
+        color: #faa;
+    }
 
 
 
@@ -40,9 +37,8 @@ nav > .menu > ul > li:hover > a {
 
 
     nav > .menu > ul > li > ul > li {
-
         border-top: 1px dashed #fff;
-                background-color: #a66;
+        background-color: #a66;
     }
 
         nav > .menu > ul > li > ul > li:hover {
@@ -57,7 +53,6 @@ label[for=switch] {
     color: #fff;
     background-color: #955;
     border-left: 1px solid #733;
-
 }
 
 
@@ -67,9 +62,7 @@ label[for=switch] {
 
 .tile {
     background-color: #955;
-
     color: #fff;
-
 }
 
     .tile:hover {
@@ -77,60 +70,57 @@ label[for=switch] {
     }
 
 .block {
-
     box-shadow: 5px 5px 10px #999;
 }
 
 .col1 {
     background-color: #fff;
-
 }
 
 .content {
     background-color: #fff;
-
 }
 
 .col2 {
     background-color: #fff;
-
 }
 
     .col2 a {
-
         color: #fff;
         background-color: #a66;
-
     }
 
         .col2 a:hover {
             background-color: #844;
         }
 
-.title {
+input[type=submit] {
+    background-color: #a66;
+}
 
+    input[type=submit]:hover {
+        background-color: #844;
+    }
+
+.title {
     color: #fff;
     background-color: #955;
-
 }
 
 
 footer {
     color: #fff;
     background-color: #955;
-
 }
 
 .footer-a {
-
     color: #fff;
-
 }
 
 
-.footer-a:hover {
-    background-color: #844;
-}
+    .footer-a:hover {
+        background-color: #844;
+    }
 
 
 
@@ -148,13 +138,6 @@ footer {
     color: #000;
 }
 
-.gallery img{
+.gallery img {
     margin: 0;
 }
-
-
-
-
-
-
-

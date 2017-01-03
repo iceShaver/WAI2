@@ -65,7 +65,7 @@ class MainController extends Controller
 
         try
         {
-        	if(!isset($_REQUEST['module']))
+        	if(!isset($_REQUEST['module']) || $_REQUEST['module']=='')
                 throw new Exception("Podana strona nie została odnaleziona");
             $controllerName = ucfirst(strtolower($_REQUEST['module'])).'Controller';
             $controllerPath = CONTROLLERS.$controllerName.'.php';

@@ -13,7 +13,7 @@ abstract class View
 
 
 
-    public function LoadModel($modelName){
+    protected function LoadModel($modelName){
         $modelPath = MODELS.$modelName.'Model.php';
         $modelName .= 'Model';
         try{
@@ -31,26 +31,26 @@ abstract class View
         return $model;
     }
 
-    protected function RenderPage($name, $output){
-        $userBlock = HTML.'userBlock.html.php';
-        $loginBlock = HTML.'loginBlock.html.php';
+    protected function RenderPage($htmlFile, $output){
+        $userBlock = HTML.'Auth/userBlock.html.php';
+        $loginBlock = HTML.'Auth/loginBlock.html.php';
 
         $output['col2']['title'] =
-            ($_SESSION['auth']->GetUserState() == UserType::USER || $_SESSION['auth']->GetUserState() == UserType::ADMIN)
+            (determineAuthorisationAtLeast(UserType::USER))
             ? 'Witaj, '.$_SESSION['auth']->GetUserName()
             : 'Zaloguj się';
 
-        $output['col2']['content'] = ($_SESSION['auth']->GetUserState() == UserType::USER || $_SESSION['auth']->GetUserState() == UserType::ADMIN)
+        $output['col2']['content'] = (determineAuthorisationAtLeast(UserType::USER))
             ? $userBlock
             : $loginBlock;
 
-        $output['content']['content'] = HTML."$name.html.php";
+        $output['content']['content'] = HTML.$htmlFile;
         $output['col1']['title'] = 'Czas';
         if(isset($_POST['loginForm']))
             $output['loginForm']['userName'] = $_POST['loginForm']['userName'];
         else
             $output['loginForm']['userName'] = '';
-        include TEMPLATES.'defaultTemplate.html.php';
+        include TEMPLATE_DIR.TEMPLATE.'.html.php';
         unset($_SESSION['messages']);
         unset($_SESSION['form']);
 

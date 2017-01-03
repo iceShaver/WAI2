@@ -14,10 +14,12 @@ class User
     public $userName;
     public $email;
     public $password;
-    public function __construct($_id, $userName, $email, $password){
+    public $privileges;
+    public function __construct($_id, $userName, $email, $password, $privileges){
         $this->_id = $_id;
         $this->userName = $userName;
         $this->email = $email;
         $this->password = $password;
+        $this->privileges = $privileges;
     }
 }

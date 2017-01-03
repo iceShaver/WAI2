@@ -23,17 +23,19 @@
     <Compile Include="Controllers\Controller.php" />
     <Compile Include="Controllers\GalleryController.php" />
     <Compile Include="Controllers\MainController.php" />
-    <Compile Include="HTML\blank.html.php" />
-    <Compile Include="HTML\col1.html.php" />
-    <Compile Include="HTML\error.html.php" />
-    <Compile Include="HTML\galleryIndex.html.php" />
-    <Compile Include="HTML\head.html.php" />
-    <Compile Include="HTML\addEditForm.html.php" />
-    <Compile Include="HTML\loginBlock.html.php" />
-    <Compile Include="HTML\main.html.php" />
-    <Compile Include="HTML\newuser.html.php" />
-    <Compile Include="HTML\picture.html.php" />
-    <Compile Include="HTML\userBlock.html.php" />
+    <Compile Include="Controllers\SearchEngineController.php" />
+    <Compile Include="HTML\SearchEngine\searchDialog.html.php" />
+    <Compile Include="HTML\Templates\Default\blank.html.php" />
+    <Compile Include="HTML\Templates\Default\col1.html.php" />
+    <Compile Include="HTML\Templates\Default\error.html.php" />
+    <Compile Include="HTML\Gallery\galleryIndex.html.php" />
+    <Compile Include="HTML\Templates\Default\head.html.php" />
+    <Compile Include="HTML\Gallery\addEditForm.html.php" />
+    <Compile Include="HTML\Auth\loginBlock.html.php" />
+    <Compile Include="HTML\Templates\Default\main.html.php" />
+    <Compile Include="HTML\Auth\newuser.html.php" />
+    <Compile Include="HTML\Gallery\picture.html.php" />
+    <Compile Include="HTML\Auth\userBlock.html.php" />
     <Compile Include="Includes\helpers.inc.php" />
     <Compile Include="index.php" />
     <Compile Include="Models\AuthModel.php" />
@@ -41,15 +43,22 @@
     <Compile Include="Models\Message.php" />
     <Compile Include="Models\Model.php" />
     <Compile Include="Models\Picture.php" />
+    <Compile Include="Models\SearchEngineModel.php" />
     <Compile Include="Models\User.php" />
-    <Compile Include="Templates\defaultTemplate.html.php" />
+    <Compile Include="HTML\Templates\Default\Default.html.php" />
     <Compile Include="Views\AuthView.php" />
     <Compile Include="Views\DefaultView.php" />
     <Compile Include="Views\GalleryView.php" />
+    <Compile Include="Views\SearchEngineView.php" />
     <Compile Include="Views\View.php" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fonts\" />
+    <Folder Include="HTML\Gallery\" />
+    <Folder Include="HTML\Auth\" />
+    <Folder Include="HTML\Templates\" />
+    <Folder Include="HTML\SearchEngine\" />
+    <Folder Include="HTML\Templates\Default\" />
     <Folder Include="Images\" />
     <Folder Include="Images\Photos\" />
     <Folder Include="Models\" />
@@ -59,7 +68,6 @@
     <Folder Include="JS\" />
     <Folder Include="CSS\" />
     <Folder Include="Includes\" />
-    <Folder Include="Templates\" />
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>

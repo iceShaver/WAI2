@@ -10,64 +10,45 @@ require_once CONTROLLERS.'Controller.php';
  */
 class GalleryController extends Controller
 {
-    /**
-     * Indexes all picture and display them
-     * @return void
-     */
-
     public function DefaultAction(){
         $this->Index();
     }
-
     public function Index(){
         $view = $this->LoadView('Gallery');
         $view->Index();
     }
-
     public function IndexMyPictures(){
-        $_SESSION['auth']->AuthoriseAtLeast(UserType::USER);
+        authoriseAtLeast(UserType::USER);
         $view = $this->LoadView("Gallery");
         $view->IndexMyPictures();
     }
-
+    public function IndexSavedPictures(){
+        $view = $this->LoadView("Gallery");
+        $view->IndexSavedPictures();
+    }
+    public function DeleteSavedPictures(){
+        $model = $this->LoadModel("Gallery");
+        $model->DeleteSavedPictures();
+        $this->Redirect($_SERVER['HTTP_REFERER']);
+        exit();
+        
+    }
     public function ShowPicture(){
         $view = $this->LoadView('Gallery');
         $view->ShowFullPicture();
     }
-
-    public function IndexSavedPictures(){
-        $view = $this->LoadView('Gallery');
-        $view->IndexSavedPictures();
-    }
-
     public function SavePictures(){
-        //TODO: move it to model
-        $_SESSION['savedPictures'] = $_POST['savedPictures'];
-        $view = $this->LoadView("Gallery");
-        $view->Index();
+        $model = $this->LoadModel("Gallery");
+        $model->SessionSavePictures();
+        $this->Redirect($_SERVER['HTTP_REFERER']);
+        exit();
     }
-
-    public function MyPictures(){
-        $view = $this->LoadView('Gallery');
-        $view->IndexMyPictures();
-    }
-
-
-    /**
-     * Displays add form for adding a new photo
-     * @return void
-     */
     public function Add(){
         $view = $this->LoadView('Gallery');
         $view->Add();
     }
-
-
-    /**
-     * Insert given photos to filesystem and create entry in db
-     * @return void
-     */
     public function Insert(){
+        
         $model = $this->LoadModel('Gallery');
         if($model->SavePicture())
         {
@@ -75,23 +56,6 @@ class GalleryController extends Controller
         }
 
         $this->Redirect('?module=gallery&action=index');
-    }
-
-
-    /**
-     * Deletes entry and photo with given id
-     * @return void
-     */
-    public function Delete(){
-        $model = $this->LoadModel('Gallery');
-        $model->Remove($_GET['id']);
-    }
-
-
-    public function LoadSampleData(){
-        $model = $this->LoadModel('Gallery');
-        $model->LoadSampleData();
-        // $this->Redirect('?');
     }
 
 }

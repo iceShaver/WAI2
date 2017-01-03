@@ -80,6 +80,16 @@ label[for=switch] {
             background-color: #448;
         }
 
+input[type=submit] {
+    cursor: pointer;
+    font-family: Lato;
+    background-color: #66a;
+}
+
+    input[type=submit]:hover {
+        background-color: #448;
+    }
+
 .title {
     color: #fff;
     background-color: #559;
@@ -113,6 +123,6 @@ footer {
     color: #000;
 }
 
-.gallery img{
+.gallery img {
     margin: 0;
 }

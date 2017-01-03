@@ -30,17 +30,17 @@ function setColorCSS(color) {
 //    }
 //}
 
-//document.addEventListener("DOMContentLoaded", function () {
-//    if (sessionStorage.historyCount == null) {
-//        sessionStorage.historyCount = 0;
-//    } else
-//        sessionStorage.historyCount++;  
-//    addPageToHistory();
-//    getHistory();
-//	if(localStorage.color != null)
-//    setColorCSS(localStorage.color);
+document.addEventListener("DOMContentLoaded", function () {
+    //if (sessionStorage.historyCount == null) {
+    //    sessionStorage.historyCount = 0;
+    //} else
+    //    sessionStorage.historyCount++;  
+    //addPageToHistory();
+    //getHistory();
+	if(localStorage.color != null)
+    setColorCSS(localStorage.color);
 
-//});
+});
 
 
 //function getHistory() {

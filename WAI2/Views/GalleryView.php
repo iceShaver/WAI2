@@ -23,7 +23,7 @@ class GalleryView extends View{
         $output['pictures'] = $model->GetPictures();
         $output['picturesAction'] = 'savePictures';
         $output['picturesActionButton'] = 'Zapisz wybrane zdjęcia';
-        $this->RenderPage('galleryIndex', $output);
+        $this->RenderPage('Gallery/galleryIndex.html.php', $output);
 
     }
 
@@ -34,7 +34,7 @@ class GalleryView extends View{
         $output['pictures'] = $model->GetMyPictures();
         $output['picturesAction'] = 'savePictures';
         $output['picturesActionButton'] = 'Zapisz wybrane zdjęcia';
-        $this->RenderPage('galleryIndex', $output);
+        $this->RenderPage('Gallery/galleryIndex.html.php', $output);
     }
 
     public function IndexSavedPictures(){
@@ -42,10 +42,10 @@ class GalleryView extends View{
         $output['page']['title'] = 'Zapisane zdjęcia';
         $output['content']['title'] = 'Zapisane zdjęcia';
         $output['pictures'] = $model->GetSavedPictures();
-        $output['picturesAction'] = 'deletePictures';
+        $output['picturesAction'] = 'deleteSavedPictures';
         $output['picturesActionButton'] = 'Usuń zdjęcia z zapisanych';
 
-        $this->RenderPage('galleryIndex', $output);
+        $this->RenderPage('Gallery/galleryIndex.html.php', $output);
     }
 
     public function Add(){
@@ -57,18 +57,16 @@ class GalleryView extends View{
             $output['author'] = $_SESSION['form']['author'];
             $output['title'] = $_SESSION['form']['title'];
             $output['watermark'] = $_SESSION['form']['watermark'];
-            $output['description'] = $_SESSION['form']['description'];
             $output['private'] = (isset($_SESSION['form']['private'])) ? $_SESSION['form']['private'] : false;
         }else{
             $output['author'] = "";
             $output['title'] = "";
             $output['watermark'] = "";
-            $output['description'] = "";
             $output['private'] = "";
         }
-        $output['author'] = ($_SESSION['auth']->DetermineAuthorisationAtLeast(UserType::USER)) ? $_SESSION['auth']->GetUserName() : '';
+        $output['author'] = (determineAuthorisationAtLeast(UserType::USER)) ? $_SESSION['auth']->GetUserName() : '';
 
-        $this->RenderPage('addEditForm', $output);
+        $this->RenderPage('Gallery/addEditForm.html.php', $output);
 
     }
 
@@ -85,6 +83,6 @@ class GalleryView extends View{
         $output['page']['title'] = $picture['title'];
         $output['content']['title'] = $picture['title'];
         $output['picture'] = $picture;
-        $this->RenderPage('picture', $output);
+        $this->RenderPage('Gallery/picture.html.php', $output);
     }
 }

@@ -1,4 +1,3 @@
-
 <form enctype="multipart/form-data" action="?module=gallery&action=insert" method="POST">
     <fieldset>
         <legend>
@@ -6,11 +5,11 @@
         </legend>
 
         <input type="hidden" name="_id" value="<?php safePrint($output['_id']); ?>" />
-        <label for="title">Nazwa zdjęcia</label>
+        <label for="title">Tytuł</label>
         <br />
         <input type="text" id="title" name="title" value="<?php safePrint($output['title']); ?>" />
         <br />
-        <label for="author">Autor zdjęcia</label>
+        <label for="author">Autor</label>
         <br />
         <input type="text" id="author" name="author" value="<?php safePrint($output['author']); ?>"
             <?php echo ($_SESSION['auth']->DetermineAuthorisationAtLeast(UserType::USER)) ? 'readonly="readonly"' : null; ?> />
@@ -19,10 +18,7 @@
         <br />
         <input type="text" id="watermark" name="watermark" value="<?php safePrint($output['watermark']); ?>" />
         <br />
-        <label for="description">Opis zdjęcia</label>
-        <br />
-        <textarea id="description" name="description"><?php safePrint($output['description'])?></textarea>
-        <br />
+        
         <br />
         <?php if($_SESSION['auth']->DetermineAuthorisationAtLeast(UserType::USER)): ?>
         Czy zdjęcie ma być prywatne?

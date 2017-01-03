@@ -322,9 +322,28 @@ table.actors {
         margin-bottom: 1px;
     }
 
-        .col2 a:hover {
-            background-color: #484;
-        }
+input[type=submit] {
+    cursor: pointer;
+    font-family: Lato;
+    background-color: #6a6;
+}
+
+    input[type=submit]:hover {
+        background-color: #484;
+    }
+
+.col2 input[type=submit] {
+    font-size: 15px;
+    margin-bottom: 1px;
+    color: #fff;
+    border: none;
+    width: 100%;
+    padding: 5px;
+}
+
+.col2 a:hover {
+    background-color: #484;
+}
 
 .title {
     font-size: 20px;
@@ -416,19 +435,31 @@ form {
     color: #000;
 }
 
-.gallery img{
+.gallery img {
     margin: 0;
 }
-.private{
+
+.private {
     color: #f00;
 }
 
 
-.selectPicture{
+.selectPicture {
     display: block;
 }
 
 
+.gallery input[type=submit] {
+    display: block;
+    clear: both;
+    width: 100%;
+    height: 40px;
+    font-size: 14pt;
+    color: white;
+    border: none;
+}
+
+ 
 /*----------------------------------------RESPONSIVE------------------------------------*/
 
 @media screen and (max-width: 1600px) {

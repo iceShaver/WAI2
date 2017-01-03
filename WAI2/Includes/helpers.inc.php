@@ -17,4 +17,3 @@ function html($text) {
 function safePrint($text) {
     echo html($text);
 }
-

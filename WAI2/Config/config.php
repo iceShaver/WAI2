@@ -4,7 +4,10 @@ define('APP_ROOT', $_SERVER['DOCUMENT_ROOT'].APP_PATH);
 define('MODELS', APP_ROOT.'Models/');
 define('VIEWS', APP_ROOT.'Views/');
 define('CONTROLLERS', APP_ROOT.'Controllers/');
-define('TEMPLATES', APP_ROOT.'Templates/');
+
+define('TEMPLATE', 'Default');
+define('TEMPLATE_DIR', APP_ROOT.'HTML/Templates/'.TEMPLATE.'/');
+
 define('HTML', APP_ROOT.'HTML/');
 define('PARTIALS', HTML.'Partials/');
 define('CONFIG', APP_ROOT.'Config/');

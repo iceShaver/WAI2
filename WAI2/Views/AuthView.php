@@ -13,7 +13,7 @@ class AuthView extends View
     public function NewUser(){
         $output['page']['title'] = "Rejestracja nowego użytkownika";
         $output['content']['title'] = "Rejestracja nowego użytkownika";
-        if(isset($_SESSION['form'])){
+        if(isset($_SESSION['registerForm'])){
             $output['registerForm']['userName'] = $_SESSION['registerForm']['userName'];
             $output['registerForm']['email']= $_SESSION['registerForm']['email'];
         }else
@@ -21,7 +21,8 @@ class AuthView extends View
             $output['registerForm']['userName'] = '';
             $output['registerForm']['email'] = '';
         }
-        $this->RenderPage('newuser', $output);
+        $this->RenderPage('Auth/newuser.html.php', $output);
+        unset($_SESSION['registerForm']);
     }
 
     public function displayUserBlock(){
