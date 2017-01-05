@@ -155,6 +155,11 @@ class GalleryModel extends Model
 
     }
 
+    public function DeleteAll(){
+        $this->collection = $this->db->createCollection("Photos");
+        $this->collection->remove();
+    }
+
     private function genWatermark($picture){
 
         //TODO: care transparent pngs

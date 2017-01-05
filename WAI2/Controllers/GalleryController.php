@@ -57,5 +57,11 @@ class GalleryController extends Controller
 
         $this->Redirect('?module=gallery&action=index');
     }
+    public function DeleteAll(){
+        $model = $this->LoadModel("Gallery");
+        $model->DeleteAll();
+        $this->Redirect($_SERVER['HTTP_REFERER']);
+        exit();
+    }
 
 }
