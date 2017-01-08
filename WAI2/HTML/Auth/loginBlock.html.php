@@ -5,6 +5,7 @@
     <label for="password">Hasło:</label><br/>
     <input type="password" name="password" id="password" />
     <!--<input type="hidden" name="action" value="login" /><br /><br />-->
+    <br/><br/>
     <input type="submit" value="Zaloguj się" />
 </form>
 <br/>

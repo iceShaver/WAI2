@@ -10,7 +10,7 @@
         <header>
 
             <div class="logo">
-                Filmy
+                Galeria zdjęć
             </div>
 
 
@@ -88,9 +88,9 @@
     <footer>
         <div class="footer-left">
             <a class="footer-a" href="#top">&uarr;</a>
-            <a class="footer-a color-red" onclick="setColorCSS('red')" href="#">R</a>
+            <!--<a class="footer-a color-red" onclick="setColorCSS('red')" href="#">R</a>
             <a class="footer-a color-green" onclick="setColorCSS('default')" href="#">G</a>
-            <a class="footer-a color-blue" onclick="setColorCSS('blue')" href="#">B</a>
+            <a class="footer-a color-blue" onclick="setColorCSS('blue')" href="#">B</a>-->
 
 
         </div>

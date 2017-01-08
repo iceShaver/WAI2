@@ -165,7 +165,7 @@ class GalleryModel extends Model
         $this->collection->remove();
         $files = glob(PHOTOS_DIR.'*'); // get all file names
         foreach($files as $file){ // iterate files
-            if(is_file($file))
+            if(is_file($file) && $file != PHOTOS_DIR.'index.php')
                 unlink($file); // delete file
         }
     }

@@ -1,21 +1,21 @@
 ﻿
 
-function setColorCSS(color) {
-    var colorLink = document.getElementById('colorcss');
-    localStorage.color = color;
-    if (colorLink != null) {
-        colorLink.parentNode.removeChild(colorLink);
-    }
-    if (color != "default")  {
-        var colorlink = document.createElement("link");
-        colorlink.setAttribute("rel", "stylesheet");
-        colorlink.setAttribute("type", "text/css");
-        colorlink.setAttribute("href", "css/color-" + color + ".css");
-        colorlink.setAttribute("id", "colorcss");
+//function setColorCSS(color) {
+//    var colorLink = document.getElementById('colorcss');
+//    localStorage.color = color;
+//    if (colorLink != null) {
+//        colorLink.parentNode.removeChild(colorLink);
+//    }
+//    if (color != "default")  {
+//        var colorlink = document.createElement("link");
+//        colorlink.setAttribute("rel", "stylesheet");
+//        colorlink.setAttribute("type", "text/css");
+//        colorlink.setAttribute("href", "css/color-" + color + ".css");
+//        colorlink.setAttribute("id", "colorcss");
 
-        document.getElementsByTagName("head").item(0).appendChild(colorlink);
-    }
-}
+//        document.getElementsByTagName("head").item(0).appendChild(colorlink);
+//    }
+//}
 //function addPageToHistory() {
 //    if (sessionStorage.historyCount <= 10)
 //        sessionStorage.setItem("historyPage" + sessionStorage.historyCount, document.title);
@@ -30,17 +30,17 @@ function setColorCSS(color) {
 //    }
 //}
 
-document.addEventListener("DOMContentLoaded", function () {
-    //if (sessionStorage.historyCount == null) {
-    //    sessionStorage.historyCount = 0;
-    //} else
-    //    sessionStorage.historyCount++;  
-    //addPageToHistory();
-    //getHistory();
-	if(localStorage.color != null)
-    setColorCSS(localStorage.color);
+//document.addEventListener("DOMContentLoaded", function () {
+//    //if (sessionStorage.historyCount == null) {
+//    //    sessionStorage.historyCount = 0;
+//    //} else
+//    //    sessionStorage.historyCount++;  
+//    //addPageToHistory();
+//    //getHistory();
+//	if(localStorage.color != null)
+//    setColorCSS(localStorage.color);
 
-});
+//});
 
 
 //function getHistory() {
@@ -56,9 +56,9 @@ document.addEventListener("DOMContentLoaded", function () {
 //}
 
 $(document).ready(function () {
-    $(".sortable").sortable();
-    $(".sortable").disableSelection();
-    $(".picture").draggable();
+    //$(".sortable").sortable();
+    //$(".sortable").disableSelection();
+    //$(".picture").draggable();
     var navY = $('nav').offset().top;
     var stickyNav = function () {
         var scrollY = $(window).scrollTop();
