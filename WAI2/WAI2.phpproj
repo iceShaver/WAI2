@@ -21,12 +21,20 @@
   <ItemGroup>
     <Compile Include="Config\config.php" />
     <Compile Include="Config\dbConfig.php" />
+    <Compile Include="Config\index.php" />
     <Compile Include="Controllers\AuthController.php" />
     <Compile Include="Controllers\Controller.php" />
     <Compile Include="Controllers\GalleryController.php" />
+    <Compile Include="Controllers\index.php" />
     <Compile Include="Controllers\MainController.php" />
     <Compile Include="Controllers\RouterController.php" />
     <Compile Include="Controllers\SearchEngineController.php" />
+    <Compile Include="CSS\index.php" />
+    <Compile Include="Fonts\index.php" />
+    <Compile Include="HTML\Auth\index.php" />
+    <Compile Include="HTML\Gallery\index.php" />
+    <Compile Include="HTML\index.php" />
+    <Compile Include="HTML\SearchEngine\index.php" />
     <Compile Include="HTML\SearchEngine\searchDialog.html.php" />
     <Compile Include="HTML\Templates\Default\blank.html.php" />
     <Compile Include="HTML\Templates\Default\col1.html.php" />
@@ -35,14 +43,21 @@
     <Compile Include="HTML\Templates\Default\head.html.php" />
     <Compile Include="HTML\Gallery\addEditForm.html.php" />
     <Compile Include="HTML\Auth\loginBlock.html.php" />
+    <Compile Include="HTML\Templates\Default\index.php" />
     <Compile Include="HTML\Templates\Default\main.html.php" />
     <Compile Include="HTML\Auth\newuser.html.php" />
     <Compile Include="HTML\Gallery\picture.html.php" />
     <Compile Include="HTML\Auth\userBlock.html.php" />
+    <Compile Include="HTML\Templates\index.php" />
+    <Compile Include="Images\index.php" />
+    <Compile Include="Images\Photos\index.php" />
     <Compile Include="Includes\helpers.inc.php" />
+    <Compile Include="Includes\index.php" />
     <Compile Include="index.php" />
+    <Compile Include="JS\index.php" />
     <Compile Include="Models\AuthModel.php" />
     <Compile Include="Models\GalleryModel.php" />
+    <Compile Include="Models\index.php" />
     <Compile Include="Models\Message.php" />
     <Compile Include="Models\Model.php" />
     <Compile Include="Models\Picture.php" />
@@ -52,6 +67,7 @@
     <Compile Include="Views\AuthView.php" />
     <Compile Include="Views\DefaultView.php" />
     <Compile Include="Views\GalleryView.php" />
+    <Compile Include="Views\index.php" />
     <Compile Include="Views\SearchEngineView.php" />
     <Compile Include="Views\View.php" />
   </ItemGroup>
@@ -74,6 +90,7 @@
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".htaccess" />
     <Content Include="CSS\color-blue.css" />
     <Content Include="CSS\color-red.css" />
     <Content Include="CSS\style.css" />
