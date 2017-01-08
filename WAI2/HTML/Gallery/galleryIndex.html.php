@@ -1,6 +1,6 @@
 
 <div class="gallery">
-    <form action="?module=gallery" method="post">
+    <form action="/gallery/<?php safePrint($output['picturesAction']); ?>" method="post">
         <?php foreach ((array)$output['pictures'] as $picture): ?>
 
 
@@ -8,7 +8,7 @@
             <input class="selectPicture" type="checkbox" name="savedPictures[]" id="<?php safePrint($picture['_id']); ?>" value="<?php safePrint($picture['_id']); ?>" />
 
             <label for="<?php safePrint($picture['_id']); ?>">
-                <a href="?module=gallery&action=showpicture&id=<?php safePrint($picture['_id']) ?>">
+                <a href="/gallery/showpicture/<?php safePrint($picture['_id']) ?>">
                     <img alt="<?php safePrint($picture['title']) ?>" src="<?php safePrint(PHOTOS_DIR_RELATIVE.$picture['minId'].'.'.$picture['extension']); ?>" />
                 </a>
             </label>
@@ -26,7 +26,7 @@
 
 
         <?php endforeach; ?>
-        <input type="hidden" name="action" value="<?php safePrint($output['picturesAction']); ?>" />
+        <!--<input type="hidden" name="action" value="" />-->
         <input type="submit" value="<?php safePrint($output['picturesActionButton']); ?>" />
     </form>
 </div>

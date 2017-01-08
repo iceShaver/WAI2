@@ -1,4 +1,5 @@
-<form enctype="multipart/form-data" action="?module=gallery&action=insert" method="POST">
+
+<form enctype="multipart/form-data" action="/gallery/insert" method="POST">
     <fieldset>
         <legend>
             <?php safePrint($output['formLegend']); ?>
@@ -18,7 +19,6 @@
         <br />
         <input type="text" id="watermark" name="watermark" value="<?php safePrint($output['watermark']); ?>" />
         <br />
-        
         <br />
         <?php if($_SESSION['auth']->DetermineAuthorisationAtLeast(UserType::USER)): ?>
         Czy zdjęcie ma być prywatne?
@@ -31,7 +31,9 @@
         <label for="false">Nie</label>
         <br />
         <?php endif; ?>
-        <input type="file" name="photo" />
+        <label for="file">Wybierz zdjęcie (max 1MB)</label>
+        <br />
+        <input id="file" type="file" name="photo" />
         <br />
         <input type="submit" value="Wyślij" />
     </fieldset>

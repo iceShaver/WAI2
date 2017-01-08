@@ -33,9 +33,9 @@ class GalleryController extends Controller
         exit();
         
     }
-    public function ShowPicture(){
+    public function ShowPicture($id){
         $view = $this->LoadView('Gallery');
-        $view->ShowFullPicture();
+        $view->ShowFullPicture($id);
     }
     public function SavePictures(){
         $model = $this->LoadModel("Gallery");
@@ -52,15 +52,15 @@ class GalleryController extends Controller
         $model = $this->LoadModel('Gallery');
         if($model->SavePicture())
         {
-            $this->Redirect('?module=gallery&action=add');
+            $this->Redirect('/gallery/add');
         }
 
-        $this->Redirect('?module=gallery&action=index');
+        $this->Redirect('/gallery/index');
     }
     public function DeleteAll(){
         $model = $this->LoadModel("Gallery");
         $model->DeleteAll();
-        $this->Redirect($_SERVER['HTTP_REFERER']);
+        $this->Redirect('/');
         exit();
     }
 

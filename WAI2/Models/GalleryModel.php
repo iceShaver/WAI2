@@ -29,6 +29,8 @@ class GalleryModel extends Model
         	$pictures[] = $row;
 
         }
+        if(!$pictures)
+            new Message(MessageType::INFO, "Brak zdjęć do wyświetlenia");
         return $pictures;
     }
 
@@ -51,12 +53,14 @@ class GalleryModel extends Model
                 $row['author'] = $this->getAuthorName($row['author']);
         	$pictures[] = $row;
         }
+        if(!$pictures)
+            new Message(MessageType::INFO, "Brak zdjęć do wyświetlenia");
         return $pictures;
     }
 
 
     public function GetSavedPictures(){
-        $pictures = null;
+        $pictures = array();
         if(!isset($_SESSION['savedPictures']))
             new Message(MessageType::INFO, "Brak zdjęć do wyświetlenia");
         else
@@ -68,10 +72,10 @@ class GalleryModel extends Model
     }
 
 
-    public function GetPicture($id = null){
+    public function GetPicture($id){
         $this->collection = $this->db->createCollection("Photos");
         if(DEBUG) echo 'Collection Photos created/selected<br/>';
-        $where = array('_id' => new MongoId(($id) ? $id : $_GET['id']));
+        $where = array('_id' => new MongoId($id));
         $picture = $this->collection->findOne($where);
         if(MongoId::isValid($picture['author']))
             $picture['author'] = $this->getAuthorName($picture['author']);
@@ -158,19 +162,30 @@ class GalleryModel extends Model
     public function DeleteAll(){
         $this->collection = $this->db->createCollection("Photos");
         $this->collection->remove();
+        $files = glob(PHOTOS_DIR.'*'); // get all file names
+        foreach($files as $file){ // iterate files
+            if(is_file($file))
+                unlink($file); // delete file
+        }
     }
 
     private function genWatermark($picture){
 
         //TODO: care transparent pngs
+
+        //Get photo
         if($picture->extension == 'png')
             $photo = imagecreatefrompng(PHOTOS_DIR.$picture->_id.'.'.$picture->extension);
         else
             $photo = imagecreatefromjpeg(PHOTOS_DIR.$picture->_id.'.'.$picture->extension);
 
+
+        //Write watermark
         $textcolor = imagecolorallocate($photo, 255, 255, 255);
         imagettftext($photo, 14, 0, 30, imagesy($photo)-30,$textcolor, FONTS.'Lato-Regular.ttf', $picture->watermark);
 
+
+        //Save photo
         if($picture->extension == 'png')
             imagepng($photo, PHOTOS_DIR.$picture->wmId.'.'.$picture->extension);
         else
@@ -180,10 +195,14 @@ class GalleryModel extends Model
     }
 
     private function genMin($picture){
+
+        //Get photo
         if($picture->extension == 'png')
             $src = imagecreatefrompng(PHOTOS_DIR.$picture->_id.'.'.$picture->extension);
         else
             $src = imagecreatefromjpeg(PHOTOS_DIR.$picture->_id.'.'.$picture->extension);
+
+        //Calculate size, position etc
         $minWidth = 200;
         $minHeight = 125;
         $min = imagecreate($minWidth, $minHeight);
@@ -207,10 +226,11 @@ class GalleryModel extends Model
 
         }
 
+        //Create miniature
         imagecopyresampled($min, $src, 0, 0, $srcX, $srcY, $minWidth, $minHeight, $srcW, $srcH);
 
 
-
+        //Save miniature
         if($picture->extension == 'png')
             imagepng($min, PHOTOS_DIR.$picture->minId.'.'.$picture->extension);
         else

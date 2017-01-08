@@ -70,16 +70,16 @@ class GalleryView extends View{
 
     }
 
-    public function ShowFullPicture(){
+    public function ShowFullPicture($id){
         $model = $this->LoadModel('Gallery');
-        $picture = $model->GetPicture();
+        $picture = $model->GetPicture($id);
         header('Content-Type: image/jpeg');
         readfile(PHOTOS_DIR.$picture['wmId'].'.'.$picture['extension']);
     }
 
-    public function ShowPicture(){
+    public function ShowPicture($id){
         $model = $this->LoadModel('Gallery');
-        $picture = $model->GetPicture();
+        $picture = $model->GetPicture($id);
         $output['page']['title'] = $picture['title'];
         $output['content']['title'] = $picture['title'];
         $output['picture'] = $picture;

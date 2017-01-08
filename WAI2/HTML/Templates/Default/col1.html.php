@@ -1,1 +1,1 @@
-Tutaj będzie zegar
+Czas serwera:<br/><?php echo date('H:i:s');

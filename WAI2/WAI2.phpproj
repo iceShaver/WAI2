@@ -25,6 +25,7 @@
     <Compile Include="Controllers\Controller.php" />
     <Compile Include="Controllers\GalleryController.php" />
     <Compile Include="Controllers\MainController.php" />
+    <Compile Include="Controllers\RouterController.php" />
     <Compile Include="Controllers\SearchEngineController.php" />
     <Compile Include="HTML\SearchEngine\searchDialog.html.php" />
     <Compile Include="HTML\Templates\Default\blank.html.php" />

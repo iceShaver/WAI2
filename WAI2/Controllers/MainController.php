@@ -3,6 +3,7 @@ require_once INCLUDES.'helpers.inc.php';
 require_once MODELS.'Message.php';
 require_once CONTROLLERS.'Controller.php';
 require_once CONTROLLERS.'AuthController.php';
+require_once CONTROLLERS.'RouterController.php';
 require_once MODELS.'AuthModel.php';
 /**
  * mainController short summary.
@@ -14,7 +15,7 @@ require_once MODELS.'AuthModel.php';
  */
 class MainController extends Controller
 {
-
+    private $router;
     /**
      * Start session, auth, messages, do action
      */
@@ -22,6 +23,9 @@ class MainController extends Controller
         session_start();
         if(!isset($_SESSION['messages']))
             $_SESSION['messages'] = array();
+        $this->router = new RouterController();
+
+
         if(!isset($_SESSION['auth']))
             $_SESSION['auth'] = new AuthController();
         $this->authHandle();
@@ -32,12 +36,15 @@ class MainController extends Controller
      * Do auth actions like registering, logging in and return to the last page
      */
     private function authHandle(){
-        if(isset($_REQUEST['auth']) || (isset($_GET['module']) && $_GET['module'] == 'auth')){
+        //if(isset($_REQUEST['auth']) || (isset($_GET['module']) && $_GET['module'] == 'auth'))
+        if($this->router->GetModule() == 'auth')
+        {
             try
             {
-                if (!isset($_REQUEST['action']))
-                    throw new Exception("Nie podano akcji");
-            	$action = $_REQUEST['action'];
+                if (!$this->router->GetAction())
+                    $this->Redirect("/");
+                //$action = $_REQUEST['action'];
+                $action = $this->router->GetAction();
                 if (!method_exists($_SESSION['auth'], $action))
                     throw new Exception("Podano nieprawidłową akcję");
                 $_SESSION['auth']->$action();
@@ -57,7 +64,7 @@ class MainController extends Controller
      * Load module controller based on input data (REQUEST) and do action
      */
     private function loadModuleController(){
-        if(empty($_REQUEST)){
+        if(empty($_REQUEST) && !$this->router->GetModule()){
             $view = $this->LoadView("Default");
             $view->DisplayMain();
             exit();
@@ -65,9 +72,12 @@ class MainController extends Controller
 
         try
         {
-        	if(!isset($_REQUEST['module']) || $_REQUEST['module']=='')
+        	//if(!isset($_REQUEST['module']) || $_REQUEST['module']=='')
+        	if(!$this->router->GetModule())
                 throw new Exception("Podana strona nie została odnaleziona");
-            $controllerName = ucfirst(strtolower($_REQUEST['module'])).'Controller';
+            $controllerName = ucfirst(strtolower($this->router->GetModule())).'Controller';
+            //if($controllerName == 'Controller')
+            //    throw new Exception("Podana strona nie została odnaleziona");
             $controllerPath = CONTROLLERS.$controllerName.'.php';
             if(!is_file($controllerPath))
                 throw new Exception("Nie odnaleziono podanego modułu");
@@ -82,12 +92,20 @@ class MainController extends Controller
             exit();
 
         }
-
-        if(empty($_REQUEST['action']))
-            $controller->DefaultAction();
-        else{
-            $action = ucfirst(strtolower($_REQUEST['action']));
-            $controller->$action();
+        try{
+            if(!$this->router->GetAction())
+                $controller->DefaultAction();
+            else{
+                $action = ucfirst(strtolower($this->router->GetAction()));
+                if(!method_exists($controller, $action))
+                    throw new Exception("Podano nieprawidłową akcję");
+                $controller->$action($this->router->GetParam());
+            }
+        }catch(Exception $exception)
+        {
+            new Message(MessageType::ERROR, $exception->getMessage());
+            $view = $this->LoadView("Default");
+            $view->DisplayError();
         }
 
 

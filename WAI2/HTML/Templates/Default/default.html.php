@@ -20,10 +20,10 @@
             <div class="menu">
                 <ul>
                     <li>
-                        <a href=".">Strona główna</a>
+                        <a href="/">Strona główna</a>
                     </li>
                     <li>
-                        <a href="?module=gallery&action=index">Wszystkie zdjęcia</a>
+                        <a href="/gallery/index">Wszystkie zdjęcia</a>
                         <!--<ul>
                             <li>
                                 <a href="polishFilms.html">Polskie</a>
@@ -34,16 +34,13 @@
                         </ul>-->
                     </li>
                     <li>
-                        <a href="?module=gallery&action=add">Dodaj zdjęcie</a>
-
-                    </li>
-                    <!--<li>
-                        <a href="?module=gallery&action=edit">Galeria</a>
-
+                        <a href="/gallery/indexsavedpictures">Zapisane zdjęcia</a>
                     </li>
                     <li>
-                        <a href="contact.html">Kontakt</a>
-                    </li>-->
+                        <a href="/gallery/add">Dodaj zdjęcie</a>
+
+                    </li>
+
                 </ul>
             </div>
 

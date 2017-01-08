@@ -78,7 +78,7 @@ class AuthController extends Controller
     public function register(){
         $model = $this->LoadModel("Auth");
         if($model->Register()){
-            $this->Redirect('?auth&action=newuser');
+            $this->Redirect('/auth/newuser');
             exit();
         }
         $this->Redirect('.');

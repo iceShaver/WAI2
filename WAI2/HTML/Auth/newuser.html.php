@@ -1,4 +1,4 @@
-<form action="?auth" method="post">
+<form action="/auth/register" method="post">
     <fieldset>
         <legend>Podaj swoje dane</legend>
         <label for="userName">Nazwa użytkownika:</label><br/>
@@ -12,7 +12,7 @@
         <label for="password2">Powtórz hasło:</label><br />
         <input type="password" id="password2" name="password2" />
 <br />
-        <input type="hidden" name="action" value="register" />
+        <!--<input type="hidden" name="action" value="register" />-->
 <br />
         <input type="submit" value="Zarejestruj" />
     </fieldset>
