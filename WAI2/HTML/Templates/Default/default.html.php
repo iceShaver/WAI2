@@ -1,3 +1,4 @@
+<?php defined('RUNNING') or die("Access violation"); ?>
 <!DOCTYPE html>
 <html lang="pl">
 

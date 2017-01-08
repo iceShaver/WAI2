@@ -1,4 +1,5 @@
 <?php
+defined('RUNNING') or die("Access violation");
 require_once INCLUDES.'helpers.inc.php';
 require_once MODELS.'Message.php';
 require_once CONTROLLERS.'Controller.php';

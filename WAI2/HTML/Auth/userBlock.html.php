@@ -1,3 +1,5 @@
+<?php defined('RUNNING') or die("Access violation"); ?>
+
 <form action="/auth/logout" method="post">
     <!--<input type="hidden" name="action" value="logout" />-->
     <input type="submit" value="Wyloguj" />

@@ -1,4 +1,5 @@
 <?php
+defined('RUNNING') or die("Access violation");
 require_once CONTROLLERS.'Controller.php';
 /**
  * Gallerry Controller
@@ -31,7 +32,7 @@ class GalleryController extends Controller
         $model->DeleteSavedPictures();
         $this->Redirect($_SERVER['HTTP_REFERER']);
         exit();
-        
+
     }
     public function ShowPicture($id){
         $view = $this->LoadView('Gallery');
@@ -48,7 +49,7 @@ class GalleryController extends Controller
         $view->Add();
     }
     public function Insert(){
-        
+
         $model = $this->LoadModel('Gallery');
         if($model->SavePicture())
         {

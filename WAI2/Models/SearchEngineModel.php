@@ -1,4 +1,5 @@
 <?php
+defined('RUNNING') or die("Access violation");
 require_once MODELS.'Model.php';
 /**
  * SearchEngineModel short summary.

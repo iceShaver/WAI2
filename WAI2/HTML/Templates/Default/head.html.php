@@ -1,3 +1,4 @@
+<?php defined('RUNNING') or die("Access violation"); ?>
 
 <head>
     <meta charset="utf-8" />

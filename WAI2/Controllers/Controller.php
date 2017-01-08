@@ -1,5 +1,5 @@
 <?php
-
+defined('RUNNING') or die("Access violation");
 /**
  * Controller short summary.
  *

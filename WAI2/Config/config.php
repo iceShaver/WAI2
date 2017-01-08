@@ -1,4 +1,5 @@
 <?php
+//defined('RUNNING') or die("Access violation");
 define('APP_PATH', '/');
 define('APP_ROOT', $_SERVER['DOCUMENT_ROOT'].APP_PATH);
 define('MODELS', APP_ROOT.'Models/');

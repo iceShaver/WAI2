@@ -1,3 +1,4 @@
+<?php defined('RUNNING') or die("Access violation"); ?>
 
 <form enctype="multipart/form-data" action="/gallery/insert" method="POST">
     <fieldset>

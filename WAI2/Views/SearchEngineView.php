@@ -1,4 +1,5 @@
 <?php
+defined('RUNNING') or die("Access violation");
 require_once 'Views/View.php';
 /**
  * SearchEngineView short summary.

@@ -1,3 +1,4 @@
+<?php defined('RUNNING') or die("Access violation"); ?>
 
 <div class="gallery">
     <form action="/gallery/<?php safePrint($output['picturesAction']); ?>" method="post">

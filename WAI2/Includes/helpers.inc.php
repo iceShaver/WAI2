@@ -1,4 +1,5 @@
 <?php
+defined('RUNNING') or die("Access violation");
 
 /*
  * Returns $text processed by htmlspecialchars

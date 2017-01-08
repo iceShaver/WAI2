@@ -1,3 +1,4 @@
+<?php defined('RUNNING') or die("Access violation"); ?>
 <div class="picture-full">
     <img src="<?php safePrint(PHOTOS_DIR_RELATIVE.$output['picture']['wmId'].'.'.$output['picture']['extension']); ?>" alt="<?php safePrint($output['picture']['title']); ?>" />
     <div class="picture-full-info">

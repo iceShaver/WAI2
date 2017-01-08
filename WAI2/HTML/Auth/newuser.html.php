@@ -1,3 +1,5 @@
+<?php defined('RUNNING') or die("Access violation"); ?>
+
 <form action="/auth/register" method="post">
     <fieldset>
         <legend>Podaj swoje dane</legend>
