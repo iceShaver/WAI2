@@ -6,7 +6,7 @@
 
 
 body {
-    background-image: url(../images/seigaiha.png);
+    background-image: url(../Images/seigaiha.png);
     background-attachment: fixed;
     color: #000;
     margin: 0 !important;
@@ -24,7 +24,7 @@ header {
     margin-left: auto;
     margin-right: auto;
     height: 180px;
-    background-image: url(../images/pexels-photo-27008.jpg);
+    background-image: url(../Images/pexels-photo-27008.jpg);
     background-size: 100%;
 }
 

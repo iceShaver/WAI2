@@ -1,5 +1,6 @@
 <?php
 //defined('RUNNING') or die("Access violation");
+error_reporting(0);
 define('APP_PATH', '/');
 define('APP_ROOT', $_SERVER['DOCUMENT_ROOT'].APP_PATH);
 define('MODELS', APP_ROOT.'Models/');
@@ -23,4 +24,13 @@ define('PHOTOS_DIR_RELATIVE', '/Images/Photos/');
 define('PHOTOS_MAX_FILE_SIZE', 1048576);
 define('PASSWORD_SALT', 'vb354H%$Hn%^JHNb%$^hj456ygh%$#');
 const PHOTOS_ALLOWED_FILE_EXTENSIONS = array('png', 'jpg', 'jpeg');
+
+//----------------------MongoDB-------------------------------------
+
+define('MONGO_SERVER', 'mongodb://localhost:27017/');
+define('MONGO_USERNAME', 'wai_web');
+define('MONGO_PASSWORD', 'w@i_w3b');
+
+
+
 ?>

@@ -21,7 +21,7 @@ abstract class Model
     public function __construct(){
         try
         {
-        	$this->dbConnection = new MongoClient();
+            $this->dbConnection = new MongoClient(MONGO_SERVER, array('username' => MONGO_USERNAME, 'password' => MONGO_PASSWORD, 'db' => 'wai'));
             if(DEBUG) echo "Successfully connected to MongoDB";
         }
         catch (MongoException $exception)
@@ -31,7 +31,7 @@ abstract class Model
             $view->DisplayError();
             exit();
         }
-        $this->db = $this->dbConnection->Gallery;
+        $this->db = $this->dbConnection->wai;
 
     }
 
